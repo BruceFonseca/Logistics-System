@@ -53,17 +53,16 @@ class Usuario extends CI_Controller{
             'tela'=> 'create',
             'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
              );
-        $this->load->view('home', $dados );
+        $this->load->view('conteudo', $dados );
     }
     
     public function retrieve() {
         $dados = array(
-            'titulo'=> 'Exibir Usuários',
             'tela'=> 'retrieve',
             'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
             'status'=> $this->usuario_model->get_all()->result(),
              );
-        $this->load->view('status', $dados);
+        $this->load->view('conteudo', $dados);
     }
     
     public function  update(){   
@@ -88,7 +87,7 @@ class Usuario extends CI_Controller{
             'tipo_usuario' => $this->tipo_usuario_model->get_all()->result_array(),
             'status_usuario' => $this->status_model->get_all()->result_array(),
              );
-        $this->load->view('teste', $dados);
+        $this->load->view('conteudo', $dados);
     }
 
     public function teste(){
@@ -97,7 +96,7 @@ class Usuario extends CI_Controller{
             'tela'=> 'update',
             'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
              );
-        $this->load->view('teste', $dados);
+        $this->load->view('conteudo', $dados);
     }
     
 }    

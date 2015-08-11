@@ -10,12 +10,13 @@ $(function(){
 		$('.nav.nav-tabs li').removeClass('active');
 		
 		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'<span>x</span></a></li>';
-	    $(".nav.nav-tabs").append($addAba);
-	    addConteudo(numTran);
 
+	    $(".nav.nav-tabs").append($addAba);
+
+	    addConteudo(numTran);//cria uma div com classe conteudo
 	    ocultaConteudo(); //oculta todos os conteudos
 		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
-		addConteudoDiv(numTran); //
+		addConteudoDiv(numTran, controller); //
 	});
 
 	// deixa a aba ativa e o respectivo conteudo tb
@@ -66,10 +67,9 @@ $(function(){
 	}
 
 	//adiciona o conteudo recebido do controler na div conteudo
-	function addConteudoDiv(numTran){
-		// var numTran = "102";
-		// var content = $('#content');
-		var href = 'usuario/teste';
+	function addConteudoDiv(numTran, controller){
+
+		var href = controller;
 			$.ajax({
 				url: href,
 				success: function( response ){

@@ -26,13 +26,8 @@ class Usuario_model extends CI_Model{
                  inner join status on usuarios.id_status_usuario = status.id
                  inner join tipo_usuario on usuarios.id_tipo_usuario = tipo_usuario.id";
          */
-          $query = "select usuarios.id as id, nome, login, email,  dt_updaterow, dt_addrow,id_tipo_usuario, 
-                tipo_usuario.ds_tipo as ds_tipo, id_status_usuario, status.ds_status as ds_status
-                from usuarios
-                inner join status on usuarios.id_status_usuario = status.id
-                inner join tipo_usuario on usuarios.id_tipo_usuario = tipo_usuario.id;";     
+          $query = "select * from users ";     
          
-
         return $this->db->query($query);
     }
     
