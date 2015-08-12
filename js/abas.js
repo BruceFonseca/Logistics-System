@@ -73,15 +73,10 @@ $(function(){
 			$.ajax({
 				url: href,
 				success: function( response ){
-					//forçando o parser
-					// var data = $( '<div>'+response+'</div>' ).find('.conteudo').html();
  					$('div[numtab="'+ numTran +'"]').append(response + "    " + href + '<br>');
-					// //apenas atrasando a troca, para mostrarmos o loading
-					// window.setTimeout( function(){
-					// 		content.html( data ).fadeIn();
-					// }, 500 );
 				}
 			});
 	}
 
+	
 }); //fim do código

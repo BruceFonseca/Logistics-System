@@ -6,14 +6,8 @@ for($i=0; $i < count($users_roles); $i++){
     $roles[($users_roles[$i]['id_user_roles'])] = ($users_roles[$i]['dsc_name']);
     }
 
-
-// //transforma o array $status_imovel que tem outros arrays em apenas um array
-// for($i=0; $i < count($users_roles); $i++){  
-//     $roles[($users_roles[$i]['id_user_roles'])] = ($users_roles[$i]['dsc_name']);
-// }
-
-echo '<h2> Cadastrar Usuário </h2>';
-echo form_open('usuario/create');
+echo '<h2> Novo Usuário </h2>';
+echo '<form method="post" action="" id="ajax_form">';
 
 echo validation_errors('<p>','</p>');
 
@@ -43,6 +37,33 @@ echo form_hidden(array('name'=>'dt_updated'),  date("d/m/y H:i:s"))."<br>";
 echo form_hidden('password', md5(123));
 
 
-echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'content'=>'Cadastrar', 'type'=>'submit'))."<br>";
+echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Cadastrar', 'type'=>'submit'))."<br>";
 
 echo form_close();
+
+?>
+
+<!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
+<script>
+	$("#submit").click(function(){
+		alert('deu certo');
+		$('#ajax_form').submit(function(){
+				
+			var dados = $( this ).serialize();
+
+			$.ajax({
+				type: "POST",
+				url: "usuario/create",
+				data: dados,
+				success: function( data )
+				{
+					alert( data );
+					$('.con').append(data);
+				}
+			});
+
+			return false;
+		});
+	});
+</script>
+
