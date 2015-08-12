@@ -6,7 +6,6 @@ for($i=0; $i < count($users_roles); $i++){
     $roles[($users_roles[$i]['id_user_roles'])] = ($users_roles[$i]['dsc_name']);
     }
 
-echo '<h2> Novo Usuário </h2>';
 echo '<form method="post" action="" id="ajax_form">';
 
 echo validation_errors('<p>','</p>');
@@ -46,7 +45,8 @@ echo form_close();
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
 	$("#submit").click(function(){
-		alert('deu certo');
+		var numtab = $(this).closest("div").attr("numtab");
+		// alert('deu certo   ' + numtab);
 		$('#ajax_form').submit(function(){
 				
 			var dados = $( this ).serialize();
@@ -57,8 +57,8 @@ echo form_close();
 				data: dados,
 				success: function( data )
 				{
-					alert( data );
-					$('.con').append(data);
+					$('div[numtab="'+ numTran +'"] form').remove();
+					$('div[numtab="'+ numTran +'"]').append(data);
 				}
 			});
 
