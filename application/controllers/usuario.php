@@ -34,7 +34,8 @@ class Usuario extends CI_Controller{
         $this->form_validation->set_rules('dsc_matricula','Matrícula','trim|required|max_lenght[45]|strtoupper');
 
         // se existe uma validação, envia os dados para o model inserir
-        if ($this->form_validation->run()==TRUE):
+        if ($this->form_validation->run()==TRUE){
+            $validacao = TRUE;
             $dados = elements(array(
                                     'username',
                                     'dsc_name',
@@ -45,14 +46,14 @@ class Usuario extends CI_Controller{
                                     'id_user_roles',
                                     'ativo' ), $this->input->post());
             $this->usuario_model->do_insert($dados);
-        endif;
-
-        
+        }
         $dados = array(
+            'validacao'=> TRUE,
             'users_roles'=> $this->users_roles_model->get_all()->result_array(),
             'tela'=> 'create',
             'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
              );
+        
         $this->load->view('conteudo', $dados );
     }
     

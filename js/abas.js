@@ -38,7 +38,7 @@ $(function(){
 	// cria uma div com o conteudo da transação selecionada pelo usuário
 	function addConteudo(numTran){
 		var counter = numTran;
-		$('.conteudo-principal').append('<div class="conteudo" numtab="'+numTran+'">' + numTran+ '</div>');
+		$('.conteudo-principal').append('<div class="conteudo" numtab="'+numTran+'"></div>');
 		// $('<div class="conteudo">conteudo</div>');
 	}
 
@@ -73,7 +73,7 @@ $(function(){
 			$.ajax({
 				url: href,
 				success: function( response ){
- 					$('div[numtab="'+ numTran +'"]').append(response + "    " + href + '<br>');
+ 					$('div[numtab="'+ numTran +'"]').append(response);
 				}
 			});
 	}

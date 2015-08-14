@@ -1,3 +1,7 @@
+
+<div class='form'>
+	
+
 <?php
 // var_dump($users_roles);
 
@@ -8,10 +12,17 @@ for($i=0; $i < count($users_roles); $i++){
 
 echo '<form method="post" action="" id="ajax_form">';
 
-echo validation_errors('<p>','</p>');
 
+?>
+<?php 
+	echo  validation_errors('<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>','</div>');
+ ?>
+
+<?php 
 if($this->session->flashdata('cadastrook')):
-    echo '<p>'.$this->session->flashdata('cadastrook').'</p>';
+    echo '<div class="alert alert-success">'.$this->session->flashdata('cadastrook').'</div>';
 endif;
 
 echo form_label('User ID');
@@ -41,6 +52,7 @@ echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','c
 echo form_close();
 
 ?>
+</div>
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
@@ -57,7 +69,7 @@ echo form_close();
 				data: dados,
 				success: function( data )
 				{
-					$('div[numtab="'+ numTran +'"] form').remove();
+					$('div[numtab="'+ numTran +'"] div').remove();
 					$('div[numtab="'+ numTran +'"]').append(data);
 				}
 			});
