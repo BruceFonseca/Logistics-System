@@ -10,7 +10,7 @@ for($i=0; $i < count($users_roles); $i++){
     $roles[($users_roles[$i]['id_user_roles'])] = ($users_roles[$i]['dsc_name']);
     }
 
-echo '<form method="post" action="" id="ajax_form">';
+echo '<form method="post" action="" class="ajax_form">';
 
 
 ?>
@@ -56,10 +56,10 @@ echo form_close();
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
-	$("#submit").click(function(){
+	$(".submit").click(function(){
 		var numtab = $(this).closest("div").attr("numtab");
 		// alert('deu certo   ' + numtab);
-		$('#ajax_form').submit(function(){
+		$('.ajax_form').submit(function(){
 				
 			var dados = $( this ).serialize();
 
