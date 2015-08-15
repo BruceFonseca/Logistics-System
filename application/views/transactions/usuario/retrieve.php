@@ -1,22 +1,28 @@
 <?php
 
-echo '<h2> Lista de Usuários </h2>';
-
 if($this->session->flashdata('excluirok')):
     echo '<p>'.$this->session->flashdata('excluirok').'</p>';
 endif;
 
-$this->table->set_heading('ID','NOME','MATRICULA','ROLE','ATIVO');
+$this->table->set_heading('ID', 'User id', 'Nome','Matrícula','Role','Status');
 
 foreach ($status as $linha):
     $this->table->add_row(
     $linha->id, 
-    $linha->dsc_name, 
+    $linha->username, 
+    $linha->nome, 
     $linha->dsc_matricula, 
-    $linha->id_user_roles, 
-    $linha->ativo);
+    $linha->role, 
+    $linha->status);
 endforeach;
+
+
+
+
+echo '<div class="retrieve-usuarios">';
+echo '<h2>Administrar usuários</h2>';	
 
 echo $this->table->generate();
 
+echo '</div>';
 

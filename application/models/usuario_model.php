@@ -26,7 +26,8 @@ class Usuario_model extends CI_Model{
                  inner join status on usuarios.id_status_usuario = status.id
                  inner join tipo_usuario on usuarios.id_tipo_usuario = tipo_usuario.id";
          */
-          $query = "select * from users ";     
+          $query = 'SELECT id, username, u.dsc_name as nome, dsc_matricula, r.dsc_name as role, ativo as status FROM users u
+                    INNER JOIN user_roles r ON u.id_user_roles = r.id_user_roles';     
          
         return $this->db->query($query);
     }

@@ -107,3 +107,53 @@
     font-weight: normal;
     line-height: 20px;
 }
+
+
+.retrieve-usuarios{
+	width: 600px;
+	padding: 20px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	margin-top: 20px;
+}
+
+.retrieve-usuarios h2{
+	margin-top: 0;
+	-moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color -moz-use-text-color #e5e5e5;
+    border-image: none;
+    border-style: none none solid;
+    border-width: 0 0 1px;
+    color: #333;
+    display: block;
+    font-size: 21px;
+    line-height: inherit;
+    margin-bottom: 20px;
+    padding: 0;
+    width: 100%;
+}
+
+.retrieve-usuarios thead{
+	color: #333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    background-color: #f0f0f0;
+    height: 30px;
+    border: solid 1px #ccc;
+}
+
+.retrieve-usuarios thead tr{
+    line-height: 20px;
+    font-weight: 300;
+    line-height: 20px;
+}
+
+.retrieve-usuarios thead tr th{
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+    border-left: dashed 1px #ccc;
+}
