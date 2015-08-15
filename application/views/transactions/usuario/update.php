@@ -1,47 +1,83 @@
+<div class='form'>
+	
+
 <?php
+// var_dump($users_roles);
+
 //transforma o array $tipo_usuario que tem outros arrays em apenas um array
-for($i=0; $i < count($tipo_usuario); $i++){
-    $tp_user[($tipo_usuario[$i]['id'])] = ($tipo_usuario[$i]['ds_tipo']);
-}
-//transforma o array $status_usuario que tem outros arrays em apenas um array
-for($i=0; $i < count($status_usuario); $i++){
-    
-    $st_user[($status_usuario[$i]['id'])] = ($status_usuario[$i]['ds_status']);
-}
-$id = $this->uri->segment(3);
-if($id==NULL) redirect('usuario/retrieve');
-$query = $this->usuario_model->get_byid($id)->row();
+for($i=0; $i < count($users_roles); $i++){
+    $roles[($users_roles[$i]['id_user_roles'])] = ($users_roles[$i]['dsc_name']);
+    }
 
-echo '<h2> Atualizar Usuário </h2>';
-echo form_open("usuario/update/$id");
-echo validation_errors('<p>','</p>');
+echo '<form method="post" action="" class="ajax_form">';
 
-if($this->session->flashdata('edicaook')):
-    echo '<p>'.$this->session->flashdata('edicaook').'</p>';
+echo form_fieldset('Criar novo usuário');
+
+?>
+<?php 
+	echo  validation_errors('<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>','</div>');
+ ?>
+
+<?php 
+if($this->session->flashdata('cadastrook')):
+    echo '<div class="alert alert-success">'.$this->session->flashdata('cadastrook').'</div>';
 endif;
 
 echo form_label('ID');
 echo form_input(array('name'=>'id'),  set_value('id', $query->id),'bloqued')."<br>";
 
-echo form_label('Nome Completo');
-echo form_input(array('name'=>'nome'),  set_value('id', $query->nome),'autofocus')."<br>";
+echo form_label('User ID');
+echo form_input(array('name'=>'username'),  set_value('username', $query->username))."<br>";
 
-echo form_label('Email');
-echo form_input(array('name'=>'email'),  set_value('id', $query->email))."<br>";
+echo form_label('Nome');
+echo form_input(array('name'=>'dsc_name'),  set_value('dsc_name',$query->nome))."<br>";
 
-echo form_label('Login');
-echo form_input(array('name'=>'login'),  set_value('id', $query->login))."<br>";
+echo form_label('Matrícula');
+echo form_input(array('name'=>'dsc_matricula'),    set_value('dsc_matricula', $query->dsc_matricula))."<br>";
 
-echo form_label('Atualizado');
-echo form_input(array('name'=>'dt_updaterow'),  set_value('id', $query->dt_updaterow))."<br>";
+echo form_label('Perfil');
+echo form_dropdown('id_user_roles', $roles , set_value('id_user_roles', $query->id_user_roles), 1)."<br>";
 
-echo form_label('Tipo Usuário');
-echo form_dropdown('id_tipo_usuario',  $tp_user, set_value('id', $query->id_tipo_usuario))."<br>";
+echo form_label('Status');
+echo form_dropdown('ativo',  array("A"=>"Ativo", "I"=>"Inativo"), set_value('ativo', $query->status), 1)."<br>";
 
-echo form_label('Status Usuário');
-echo form_dropdown('id_status_usuario',  $st_user,set_value('id', $query->id_status_usuario))."<br>";
+echo form_hidden(array('name'=>'dt_added'),  date("d/m/y H:i:s"));
 
-echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'content'=>'Atualizar', 'type'=>'submit'))."<br>";
+echo form_hidden(array('name'=>'dt_updated'),  date("d/m/y H:i:s"));
 
+echo form_hidden('password', md5(123));
+echo form_label('');
+echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Cadastrar', 'type'=>'submit'))."<br>";
 
+echo form_fieldset_close();
 echo form_close();
+
+?>
+</div>
+
+<!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
+<script>
+	$(".submit").click(function(){
+		var numtab = $(this).closest("div").attr("numtab");
+		// alert('deu certo   ' + numtab);
+		$('.ajax_form').submit(function(){
+				
+			var dados = $( this ).serialize();
+
+			$.ajax({
+				type: "POST",
+				url: "usuario/create",
+				data: dados,
+				success: function( data )
+				{
+					$('div[numtab="'+ numTran +'"] div').remove();
+					$('div[numtab="'+ numTran +'"]').append(data);
+				}
+			});
+
+			return false;
+		});
+	});
+</script>

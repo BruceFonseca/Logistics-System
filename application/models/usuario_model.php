@@ -21,11 +21,6 @@ class Usuario_model extends CI_Model{
     }
     
     public function get_all(){
-        /*
-        $query = "select * from usuarios
-                 inner join status on usuarios.id_status_usuario = status.id
-                 inner join tipo_usuario on usuarios.id_tipo_usuario = tipo_usuario.id";
-         */
           $query = 'SELECT id, username, u.dsc_name as nome, dsc_matricula, r.dsc_name as role, ativo as status FROM users u
                     INNER JOIN user_roles r ON u.id_user_roles = r.id_user_roles';     
          
@@ -33,22 +28,12 @@ class Usuario_model extends CI_Model{
     }
     
     
-    public function get_byid($id= NULL) {
-        $query = "select usuarios.id as id, nome, login, email,  dt_updaterow, dt_addrow,id_tipo_usuario, 
-                tipo_usuario.ds_tipo as ds_tipo, id_status_usuario, status.ds_status as ds_status
-                from usuarios
-                inner join status on usuarios.id_status_usuario = status.id
-                inner join tipo_usuario on usuarios.id_tipo_usuario = tipo_usuario.id "." WHERE usuarios.id = ".$id.";" ;
+    public function get_byid($id) {
+        $query = 'SELECT id, username, u.dsc_name as nome, dsc_matricula, u.id_user_roles , r.dsc_name as role, ativo as status FROM users u
+                  INNER JOIN user_roles r ON u.id_user_roles = r.id_user_roles
+                  WHERE id = ' . $id ; 
 
-        if ($id != NULL):
-            /*$this->db->where('id',$id);
-            $this->db->limit(1);
-            return $this->db->get('usuarios');*/
-            return $this->db->query($query);
-            
-        else:
-            return FALSE;
-        endif;
+        return $this->db->query($query);
     }
     
 }

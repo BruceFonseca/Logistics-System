@@ -4,7 +4,7 @@ if($this->session->flashdata('excluirok')):
     echo '<p>'.$this->session->flashdata('excluirok').'</p>';
 endif;
 
-$this->table->set_heading('ID', 'User id', 'Nome','Matrícula','Role','Status');
+$this->table->set_heading('ID', 'User id', 'Nome','Matrícula','Role','Status', 'Ação');
 
 foreach ($status as $linha):
     $this->table->add_row(
@@ -13,7 +13,8 @@ foreach ($status as $linha):
     $linha->nome, 
     $linha->dsc_matricula, 
     $linha->role, 
-    $linha->status);
+    $linha->status,
+	'<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>');
 endforeach;
 
 

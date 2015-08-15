@@ -68,36 +68,47 @@ class Usuario extends CI_Controller{
     
     public function  update(){   
         
-     $this->form_validation->set_rules('nome','NOME','trim|required|max_lenght[45]|strtolower');
+    // validação dos dados recebidos do formulário
+    // $this->form_validation->set_rules('username','User ID','trim|required|max_lenght[45]|strtoupper|is_unique[users.username]');
+    // $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
+    // $this->form_validation->set_rules('dsc_name','Nome','trim|required|max_lenght[100]|strtoupper');
+    // $this->form_validation->set_rules('dsc_matricula','Matrícula','trim|required|max_lenght[45]|strtoupper');
 
-    $this->form_validation->set_rules('email','EMAIL','trim|required|valid_email|max_lenght[45]|strtolower');
+    // recebe mo id via post
+    $id = 11;
 
-    $this->form_validation->set_rules('login','LOGIN','trim|required|max_lenght[45]|strtolower');
-    
     //elements(array('nome','email','login','dt_addrow','dt_updaterow','senha','id_tipo_usuario', 'id_status_usuario')
         if ($this->form_validation->run()==TRUE):
-            $dados = elements(array('nome','email','login','dt_updaterow','id_tipo_usuario', 'id_status_usuario'), $this->input->post());
+            $dados = elements(array(
+                                    'username',
+                                    'dsc_name',
+                                    'dsc_matricula', 
+                                    'password',
+                                    'dt_added',
+                                    'dt_updated',
+                                    'id_user_roles',
+                                    'ativo' ));
             $this->usuario_model->do_update($dados, array('id'=>$this->input->post('id')));
         endif;
-       
+
         $dados = array(
-            'titulo'=> 'Alteração de Usuário',
+            // 'validacao'=> TRUE,
+            'users_roles'=> $this->users_roles_model->get_all()->result_array(),
             'tela'=> 'update',
             'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
-            'status'=> $this->usuario_model->get_all()->result(),
-            'tipo_usuario' => $this->tipo_usuario_model->get_all()->result_array(),
-            'status_usuario' => $this->status_model->get_all()->result_array(),
+            'query'=> $this->usuario_model->get_byid($id)->row(),
              );
-        $this->load->view('conteudo', $dados);
+        
+        $this->load->view('conteudo', $dados );
     }
 
-    public function teste(){
-        $dados = array(
-            'titulo'=> 'Alteração de Usuário',
-            'tela'=> 'update',
-            'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
-             );
-        $this->load->view('conteudo', $dados);
-    }
+    // public function teste(){
+    //     $dados = array(
+    //         'titulo'=> 'Alteração de Usuário',
+    //         'tela'=> 'update',
+    //         'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+    //          );
+    //     $this->load->view('conteudo', $dados);
+    // }
     
 }    
