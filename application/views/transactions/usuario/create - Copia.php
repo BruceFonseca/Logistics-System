@@ -12,7 +12,6 @@ for($i=0; $i < count($users_roles); $i++){
 
 echo '<form method="post" action="" class="ajax_form">';
 
-echo form_fieldset('Criar novo usuário');
 
 ?>
 <?php 
@@ -29,7 +28,7 @@ endif;
 echo form_label('User ID');
 echo form_input(array('name'=>'username'),  '','autofocus')."<br>";
 
-echo form_label('Nome');
+echo form_label('Nome Completo');
 echo form_input(array('name'=>'dsc_name'),  '')."<br>";
 
 echo form_label('Matrícula');
@@ -38,18 +37,18 @@ echo form_input(array('name'=>'dsc_matricula'),  '')."<br>";
 echo form_label('Perfil');
 echo form_dropdown('id_user_roles', $roles ,'3', 1)."<br>";
 
-echo form_label('Status');
+echo form_label('Status Usuário');
 echo form_dropdown('ativo',  array("A"=>"Ativo", "I"=>"Inativo"),'A', 1)."<br>";
 
-echo form_hidden(array('name'=>'dt_added'),  date("d/m/y H:i:s"));
+echo form_hidden(array('name'=>'dt_added'),  date("d/m/y H:i:s"))."<br>";
 
-echo form_hidden(array('name'=>'dt_updated'),  date("d/m/y H:i:s"));
+echo form_hidden(array('name'=>'dt_updated'),  date("d/m/y H:i:s"))."<br>";
 
 echo form_hidden('password', md5(123));
-echo form_label('');
+
+
 echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Cadastrar', 'type'=>'submit'))."<br>";
 
-echo form_fieldset_close();
 echo form_close();
 
 ?>

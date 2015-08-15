@@ -22,17 +22,28 @@ $(function(){
 	// deixa a aba ativa e o respectivo conteudo tb
 	$(".nav.nav-tabs").on("click", "li", function(){
 		var numTran = $(this).children('a').attr('numtab');
+
+		ativarAba(numTran);
+	});
+
+	// ativa a aba de acordo com o numTran
+	function ativarAba(numTran){
+		// alert('verifica' + numTran);
 	    $('.nav.nav-tabs li').removeClass('active');
-		$(this).addClass('active');
+	    $('a[numtab="'+ numTran +'"]').parent().addClass('active')
+		// $(this).addClass('active');
 		ocultaConteudo(); //oculta todos os conteudos
 		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
-	});
+
+	}
 
 	// fecha a aba e seu respectivo conteudo
 	$(".nav.nav-tabs").on("click", "li a span", function(){
 		var numtab = $(this).closest("a").attr("numtab");
 		$('a[numtab="'+ numtab +'"]').parent().remove();//remove a aba do numtab selecionado
 		$('div[numtab="'+ numtab +'"]').remove(); //remove a div que contem o numtab selecionado
+
+		ativaAbaAposFechar();
 	});
 
 	// cria uma div com o conteudo da transação selecionada pelo usuário
@@ -78,5 +89,13 @@ $(function(){
 			});
 	}
 
+	// função que ativa a maior aba após alguma ser fechada
+	function ativaAbaAposFechar(){
+
+		var numTran = parseInt($(".nav.nav-tabs li a").first().attr('numtab'));//numTab();
+		
+		ativarAba(numTran);
+		exibeConteudo(numTran);
+	}
 	
 }); //fim do código
