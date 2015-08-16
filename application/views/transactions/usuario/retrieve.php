@@ -38,11 +38,11 @@ $('.retrieve-usuarios tr td span').click(function(){
 
 	//encontra o id do usuário que será atualizado
 	var abc = $(this).closest('tr').find('td[class="id-usuario"]').text();
-	
+	var desc = 'Atualizar usuário';
 	var href = 'usuario/update';
 	// alert(abc);
 
-	criarNovaAba();
+	criarNovaAba(href, desc, numTran);
 	// var href = controller;
 	// 		$.ajax({
 	// 			url: href,
