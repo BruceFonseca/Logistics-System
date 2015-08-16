@@ -6,9 +6,12 @@ endif;
 
 $this->table->set_heading('ID', 'User id', 'Nome','Matrícula','Role','Status', 'Ação');
 
+
 foreach ($status as $linha):
+$id = array('data'=> $linha->id, 'class'=>'id-usuario');
+
     $this->table->add_row(
-    $linha->id, 
+    $id, 
     $linha->username, 
     $linha->nome, 
     $linha->dsc_matricula, 
@@ -26,4 +29,28 @@ echo '<h2>Administrar usuários</h2>';
 echo $this->table->generate();
 
 echo '</div>';
+
+?>
+
+<!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
+<script>
+$('.retrieve-usuarios tr td span').click(function(){
+
+	//encontra o id do usuário que será atualizado
+	var abc = $(this).closest('tr').find('td[class="id-usuario"]').text();
+	
+	var href = 'usuario/update';
+	// alert(abc);
+
+	criarNovaAba();
+	// var href = controller;
+	// 		$.ajax({
+	// 			url: href,
+	// 			success: function( response ){
+ // 					$('div[numtab="'+ numTran +'"]').append(response);
+	// 			}
+	// 		});
+});
+
+</script>
 

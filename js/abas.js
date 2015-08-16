@@ -1,23 +1,51 @@
 $(function(){
 
+
+	// // cria uma nova aba referente a transação selecionada pelo usuário
+	// $(".dropdown-menu li a").click(function(){
+	// 	var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
+	// 	var desc = $(this).text(); // pega descrição do menu e utiliza nas abas que serão abertas
+	// 	var numTran = numTab();
+
+	// 	$('.nav.nav-tabs li').removeClass('active');
+		
+	// 	var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'<span>x</span></a></li>';
+
+	//     $(".nav.nav-tabs").append($addAba);
+
+	//     addConteudo(numTran);//cria uma div com classe conteudo
+	//     ocultaConteudo(); //oculta todos os conteudos
+	// 	exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
+	// 	addConteudoDiv(numTran, controller); //
+	// });
+
 	// cria uma nova aba referente a transação selecionada pelo usuário
 	$(".dropdown-menu li a").click(function(){
 		var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
 		var desc = $(this).text(); // pega descrição do menu e utiliza nas abas que serão abertas
-
 		var numTran = numTab();
 
-		$('.nav.nav-tabs li').removeClass('active');
-		
-		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'<span>x</span></a></li>';
+		criarNovaAba(controller, desc, numTran);
 
-	    $(".nav.nav-tabs").append($addAba);
-
-	    addConteudo(numTran);//cria uma div com classe conteudo
-	    ocultaConteudo(); //oculta todos os conteudos
-		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
-		addConteudoDiv(numTran, controller); //
 	});
+
+	// // cria uma nova aba referente a transação selecionada pelo usuário
+	// $(".dropdown-menu li a").click(function(){
+	// 	var controller = $(this).attr('ctr'); //este atributo será utilizado para trazer o controller da transaçãoque será utilizado para manupulkar abas (abrir fechar etc) as abas
+	// 	var desc = $(this).text(); // pega descrição do menu e utiliza nas abas que serão abertas
+	// 	var numTran = numTab();
+
+	// 	$('.nav.nav-tabs li').removeClass('active');
+		
+	// 	var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'<span>x</span></a></li>';
+
+	//     $(".nav.nav-tabs").append($addAba);
+
+	//     addConteudo(numTran);//cria uma div com classe conteudo
+	//     ocultaConteudo(); //oculta todos os conteudos
+	// 	exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
+	// 	addConteudoDiv(numTran, controller); //
+	// });
 
 	// deixa a aba ativa e o respectivo conteudo tb
 	$(".nav.nav-tabs").on("click", "li", function(){
@@ -25,6 +53,19 @@ $(function(){
 
 		ativarAba(numTran);
 	});
+
+	//cria uma nova aba
+	function criarNovaAba(controller, desc, numTran){
+		// alert('entriou' + controller + desc + numTran);
+
+		$('.nav.nav-tabs li').removeClass('active');
+		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'<span>x</span></a></li>';
+	    $(".nav.nav-tabs").append($addAba);
+	    addConteudo(numTran);//cria uma div com classe conteudo
+	    ocultaConteudo(); //oculta todos os conteudos
+		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
+		addConteudoDiv(numTran, controller);
+	}
 
 	// ativa a aba de acordo com o numTran
 	function ativarAba(numTran){
