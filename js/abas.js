@@ -17,29 +17,6 @@ $(function(){
 		ativarAba(numTran);
 	});
 
-	// cria uma nova aba referente a transação selecionada pelo usuário
-	function criarNovaAba(controller, desc){
-		// alert('entriou' + controller + desc + numTran);
-		var numTran = numTab();
-		$('.nav.nav-tabs li').removeClass('active');
-		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'<span>x</span></a></li>';
-	    $(".nav.nav-tabs").append($addAba);
-	    addConteudo(numTran);//cria uma div com classe conteudo
-	    ocultaConteudo(); //oculta todos os conteudos
-		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
-		addConteudoDiv(numTran, controller);
-	}
-
-	// ativa a aba de acordo com o numTran
-	function ativarAba(numTran){
-		// alert('verifica' + numTran);
-	    $('.nav.nav-tabs li').removeClass('active');
-	    $('a[numtab="'+ numTran +'"]').parent().addClass('active')
-		// $(this).addClass('active');
-		ocultaConteudo(); //oculta todos os conteudos
-		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
-
-	}
 
 	// fecha a aba e seu respectivo conteudo
 	$(".nav.nav-tabs").on("click", "li a span", function(){
@@ -49,6 +26,11 @@ $(function(){
 
 		ativaAbaAposFechar();
 	});
+
+
+}); //fim do código
+
+
 
 	// cria uma div com o conteudo da transação selecionada pelo usuário
 	function addConteudo(numTran){
@@ -81,6 +63,29 @@ $(function(){
 		$('.conteudo-principal .conteudo').hide();
 	}
 
+	// cria uma nova aba referente a transação selecionada pelo usuário
+	function criarNovaAba(controller, desc){
+		// alert('entriou' + controller + desc + numTran);
+		var numTran = numTab();
+		$('.nav.nav-tabs li').removeClass('active');
+		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'<span>x</span></a></li>';
+	    $(".nav.nav-tabs").append($addAba);
+	    addConteudo(numTran);//cria uma div com classe conteudo
+	    ocultaConteudo(); //oculta todos os conteudos
+		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
+		addConteudoDiv(numTran, controller);
+	}
+
+	// ativa a aba de acordo com o numTran
+	function ativarAba(numTran){
+		// alert('verifica' + numTran);
+	    $('.nav.nav-tabs li').removeClass('active');
+	    $('a[numtab="'+ numTran +'"]').parent().addClass('active');
+		// $(this).addClass('active');
+		ocultaConteudo(); //oculta todos os conteudos
+		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
+	}
+
 	//adiciona o conteudo recebido do controler na div conteudo
 	function addConteudoDiv(numTran, controller){
 
@@ -101,5 +106,8 @@ $(function(){
 		ativarAba(numTran);
 		exibeConteudo(numTran);
 	}
+
+	function asdfg(){
+		alert('está dando certo');
+	}
 	
-}); //fim do código

@@ -32,25 +32,22 @@ echo '</div>';
 
 ?>
 
+
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
-$('.retrieve-usuarios tr td span').click(function(){
+$('.retrieve-usuarios tr td span').on('click',function(){
 
 	//encontra o id do usuário que será atualizado
-	var abc = $(this).closest('tr').find('td[class="id-usuario"]').text();
+	var id_usuario = $(this).closest('tr').find('td[class="id-usuario"]').text();
 	var desc = 'Atualizar usuário';
 	var href = 'usuario/update';
-	// alert(abc);
+	alert(id_usuario);
 
-	criarNovaAba(href, desc, numTran);
-	// var href = controller;
-	// 		$.ajax({
-	// 			url: href,
-	// 			success: function( response ){
- // 					$('div[numtab="'+ numTran +'"]').append(response);
-	// 			}
-	// 		});
+	
+
 });
+
+
 
 </script>
 
