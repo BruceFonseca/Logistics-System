@@ -35,15 +35,25 @@ echo '</div>';
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
-$('.retrieve-usuarios tr td span').on('click',function(){
+$('.retrieve-usuarios tr td span').click(function(){
 
 	//encontra o id do usuário que será atualizado
 	var id_usuario = $(this).closest('tr').find('td[class="id-usuario"]').text();
 	var desc = 'Atualizar usuário';
-	var href = 'usuario/update';
-	alert(id_usuario);
+	var controller = 'usuario/update';
+	var numTran = numTab();
 
-	
+	criarNovaAbaSemConteudo(controller, desc, numTran);
+
+	 $.ajax({
+            type      : 'post',
+            url       : controller, //é o controller que receberá
+            data      : 'id='+ id_usuario,
+            
+            success: function( response ){
+ 					$('div[numtab="'+ numTran +'"]').append(response);
+			}
+        });
 
 });
 

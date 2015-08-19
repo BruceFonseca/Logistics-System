@@ -58,6 +58,7 @@ $(function(){
 	function exibeConteudo(numTran){
 		$('div[numtab="'+ numTran +'"]').show();
 	}
+
 	//oculta todos os conteudos.
 	function ocultaConteudo(){
 		$('.conteudo-principal .conteudo').hide();
@@ -74,6 +75,18 @@ $(function(){
 	    ocultaConteudo(); //oculta todos os conteudos
 		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
 		addConteudoDiv(numTran, controller);
+	}
+
+	// cria uma nova aba referente a transação selecionada pelo usuário,
+	function criarNovaAbaSemConteudo(controller, desc, numTran){
+		// alert('entriou' + controller + desc + numTran);
+		var numTran = numTab();
+		$('.nav.nav-tabs li').removeClass('active');
+		var $addAba = '<li class="active"><a href="#" numtab="'+ numTran +'" id=" '+ desc  +'" crt="'+ controller +'">'+ desc  +'<span>x</span></a></li>';
+	    $(".nav.nav-tabs").append($addAba);
+	    addConteudo(numTran);//cria uma div com classe conteudo
+	    ocultaConteudo(); //oculta todos os conteudos
+		exibeConteudo(numTran); //exibe conteudo apenas da aba selecionada
 	}
 
 	// ativa a aba de acordo com o numTran
@@ -107,7 +120,3 @@ $(function(){
 		exibeConteudo(numTran);
 	}
 
-	function asdfg(){
-		alert('está dando certo');
-	}
-	

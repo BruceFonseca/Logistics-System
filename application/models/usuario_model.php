@@ -14,7 +14,7 @@ class Usuario_model extends CI_Model{
 
     public function do_update($dados=NULL, $condicao=NULL){
         if ($dados != NULL && $condicao != NULL):
-            $this->db->update('usuarios',$dados, $condicao);
+            $this->db->update('users',$dados, $condicao);
             $this->session->set_flashdata('edicaook','Cadastro alterado com sucesso');
             redirect(current_url());
         endif;
