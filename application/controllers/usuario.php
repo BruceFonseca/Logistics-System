@@ -67,48 +67,51 @@ class Usuario extends CI_Controller{
     }
     
     public function  update(){   
+
+    $flash_data = NULL;
+
+    if($this->session->flashdata('edicaook')):
+        $flash_data = '<div class="alert alert-success">Uruário atualizado com sucesso!!!</div>';
+    endif;
+      
+
+
+    // recebe o id do usuário através da URL
+    $id = $this->uri->segment(3);
+
+    if($this->input->post('dsc_name')){
         
-    // validação dos dados recebidos do formulário
-    // $this->form_validation->set_rules('username','User ID','trim|required|max_lenght[45]|strtoupper|is_unique[users.username]');
-    // $this->form_validation->set_message('is_unique', 'Este %s já está cadastrado.');//é uma menssagem definida pelo programador onde %s é o nome do campo
-    // $this->form_validation->set_rules('nome','Nome','trim|max_lenght[100]|strtoupper');
-    // $this->form_validation->set_rules('dsc_matricula','Matrícula','trim|required|max_lenght[45]|strtoupper');
+        //o $id é setado novamente quando vem por POST 
+        $id = $this->input->post('id');
 
-    // recebe mo id via post
-    $id = $this->input->post('id');
+        $this->form_validation->set_rules('dsc_name','Nome','trim');
 
-    // se existe o post nome, então quer dizer que o post está vindo do formulário de atualização
-    // caso contrário, o post recebido é da "admin. usuários"
-    if($this->input->post('nome')){
-       
         if ($this->form_validation->run()==TRUE):
+
+
             $dados = elements(array(
                                     'id',
                                     'username',
                                     'password',
-                                    'nome',
+                                    'dsc_name',
                                     'dsc_matricula', 
                                     'id_user_roles',
                                     'ativo',
-                                    'dt_added',
                                     'dt_updated'), $this->input->post());
-            $this->usuario_model->do_update($dados, array('id'=>$id));
+            $this->usuario_model->do_update($dados, array('id'=> $id));
         endif;
 
     }//fim do if
-
-
-
     
-        $dados = array(
-            // 'validacao'=> TRUE,
-            'users_roles'=> $this->users_roles_model->get_all()->result_array(),
-            'tela'=> 'update',
-            'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
-            'query'=> $this->usuario_model->get_byid($id)->row(),
-             );
+    $dados = array(
+        'users_roles'=> $this->users_roles_model->get_all()->result_array(),
+        'tela'=> 'update',
+        'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+        'query'=> $this->usuario_model->get_byid($id)->row(),
+        'flash_data'=> $flash_data,
+         );
         
         $this->load->view('conteudo', $dados );
     }
     
-}    
+}//fim da classe    

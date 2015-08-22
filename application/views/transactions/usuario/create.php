@@ -59,7 +59,7 @@ echo form_close();
 <script>
 	$(".submit").click(function(){
 		var numtab = $(this).closest("div").attr("numtab");
-		// alert('deu certo   ' + numtab);
+		
 		$('.ajax_form').submit(function(){
 				
 			var dados = $( this ).serialize();
@@ -70,6 +70,7 @@ echo form_close();
 				data: dados,
 				success: function( data )
 				{
+					alert('deu certo   ' + numTran);
 					$('div[numtab="'+ numTran +'"] div').remove();
 					$('div[numtab="'+ numTran +'"]').append(data);
 				}

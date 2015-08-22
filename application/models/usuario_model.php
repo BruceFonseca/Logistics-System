@@ -5,17 +5,26 @@ class Usuario_model extends CI_Model{
     public function do_insert($dados=NULL){            
         
         if ($dados != NULL):
-                $this->db->insert('users',$dados);
-                $this->session->set_flashdata('cadastrook','Cadastro efetuado com sucesso');
-                redirect('usuario/create');
-            endif;
+            $this->db->insert('users',$dados);
+            $this->session->set_flashdata('cadastrook','Cadastro efetuado com sucesso');
+            redirect('usuario/create');
+        endif;
             
     }
+
+    // public function do_update($dados=NULL, $condicao=NULL){
+
+    //     if ($dados != NULL && $condicao != NULL):
+    //         $this->db->update('users',$dados, $condicao);
+    //         $this->session->set_flashdata('cadastrook','Cadastro efetuado com sucesso');
+    //         redirect('usuario/update');
+    //     endif;
+    // }
 
     public function do_update($dados=NULL, $condicao=NULL){
         if ($dados != NULL && $condicao != NULL):
             $this->db->update('users',$dados, $condicao);
-            $this->session->set_flashdata('edicaook','Cadastro alterado com sucesso');
+            $this->session->set_flashdata('edicaook','Usuário atualizado com sucesso');
             redirect(current_url());
         endif;
     }

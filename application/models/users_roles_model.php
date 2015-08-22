@@ -6,7 +6,7 @@ class Users_roles_model extends CI_Model{
         /*
         TODOS - MENOS - "Administrador" - 
          */
-        $query = "select * from user_roles where id_user_roles <> 1";     
+        $query = "select * from user_roles";     
          
         return $this->db->query($query);
     }

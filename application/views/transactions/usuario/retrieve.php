@@ -40,7 +40,7 @@ $('.retrieve-usuarios tr td span').click(function(){
 	//encontra o id do usuário que será atualizado
 	var id_usuario = $(this).closest('tr').find('td[class="id-usuario"]').text();
 	var desc = 'Atualizar usuário';
-	var controller = 'usuario/update';
+	var controller = 'usuario/update/'+id_usuario;
 	var numTran = numTab();
 
 	criarNovaAbaSemConteudo(controller, desc, numTran);

@@ -9,30 +9,30 @@ for($i=0; $i < count($users_roles); $i++){
     $roles[($users_roles[$i]['id_user_roles'])] = ($users_roles[$i]['dsc_name']);
     }
 
-echo '<form method="post" action="" class="ajax_form">';
+	echo '<form method="post" action="" class="ajax_form">';
 
-echo form_fieldset('Atualizar usuário');
+	echo form_fieldset('Atualizar usuário');
+		
+	if($flash_data):
+        echo $flash_data;
+    endif;
 
-?>
-<?php 
 	echo  validation_errors('<div class="alert alert-danger" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>','</div>');
  ?>
 
 <?php 
-if($this->session->flashdata('cadastrook')):
-    echo '<div class="alert alert-success">'.$this->session->flashdata('cadastrook').'</div>';
-endif;
+
 
 echo form_label('ID');
-echo form_input(array('name'=>'id'),  set_value('id', $query->id),'bloqued')."<br>";
+echo form_input(array('name'=>'id', 'class'=>'id-usuario'),  set_value('id', $query->id),'bloqued')."<br>";
 
 echo form_label('User ID');
 echo form_input(array('name'=>'username'),  set_value('username', $query->username))."<br>";
 
 echo form_label('Nome');
-echo form_input(array('name'=>'nome'),  set_value('nome',$query->nome))."<br>";
+echo form_input(array('name'=>'dsc_name'),  set_value('dsc_name',$query->nome))."<br>";
 
 echo form_label('Matrícula');
 echo form_input(array('name'=>'dsc_matricula'),    set_value('dsc_matricula', $query->dsc_matricula))."<br>";
@@ -60,18 +60,21 @@ echo form_close();
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
 	$(".submit").click(function(){
-		var numtab = $(this).closest("div").attr("numtab");
-		// alert('deu certo   ' + numtab);
+		// var numtab = $(this).closest("div").attr("numtab");
+		// var numtab = $(this).closest("div").attr("numtab");
+		var id_usuario = $(this).closest('fieldset').find('input.id-usuario').val();
+		// alert('deu certo   ' + id_usuario );
 		$('.ajax_form').submit(function(){
 				
 			var dados = $( this ).serialize();
 
 			$.ajax({
 				type: "POST",
-				url: "usuario/update",
+				url: "usuario/update/"+ id_usuario,
 				data: dados,
 				success: function( data )
 				{
+					// alert('deu certo   ' + numTran);
 					$('div[numtab="'+ numTran +'"] div').remove();
 					$('div[numtab="'+ numTran +'"]').append(data);
 				}
