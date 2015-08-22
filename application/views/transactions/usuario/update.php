@@ -43,11 +43,6 @@ echo form_dropdown('id_user_roles', $roles , set_value('id_user_roles', $query->
 echo form_label('Status');
 echo form_dropdown('ativo',  array("A"=>"Ativo", "I"=>"Inativo"), set_value('ativo', $query->status), 1)."<br>";
 
-echo form_hidden(array('name'=>'dt_added'),  date("d/m/y H:i:s"));
-
-echo form_hidden(array('name'=>'dt_updated'),  date("d/m/y H:i:s"));
-
-echo form_hidden('password', md5(123));
 echo form_label('');
 echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Salvar', 'type'=>'submit'))."<br>";
 

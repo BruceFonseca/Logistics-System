@@ -71,7 +71,7 @@ class Usuario extends CI_Controller{
     $flash_data = NULL;
 
     if($this->session->flashdata('edicaook')):
-        $flash_data = '<div class="alert alert-success">Uruário atualizado com sucesso!!!</div>';
+        $flash_data = '<div class="alert alert-success">Usuário atualizado com sucesso!!!</div>';
     endif;
       
 
