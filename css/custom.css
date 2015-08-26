@@ -34,7 +34,16 @@
 	display: table;
 }
 
-.form form button {
+.form form input[type="file"]{
+    width:100%;
+    padding: 0;
+    margin-left: 0;
+}
+
+.form form input[type="submit"]{
+    width: 100px;
+}
+.form form button, .form form input[type="submit"] {
     background-image: linear-gradient(to bottom, #337ab7 0%, #265a88 100%);
     background-repeat: repeat-x;
     border-color: #245580;
@@ -60,6 +69,10 @@
     white-space: nowrap;
     font-family: inherit;
 }
+
+/*button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    cursor: pointer;
+}*/
 
 .form form{
 	width: 400px;

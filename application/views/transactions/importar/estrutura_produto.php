@@ -7,7 +7,7 @@
 		<!-- AJAX Response will be outputted on this DIV container -->
 	    <div class = "upload-messages-esturtura-produto"></div>
         <input type="file" multiple = "multiple"  class = "form-control" name="uploadfile[]" /><br />
-        <input type="submit" name = "submit" value="Upload" class = "btn btn-primary" />
+        <input type="submit" name = "submit" value="Carregar" class = "submit-form" />
        </fieldset>
     </form>
 
