@@ -9,6 +9,7 @@
 
         <script type="text/javascript" src=<?php echo base_url("js/jquery-2.1.0.js" )?>></script>
         <script type="text/javascript" src=<?php echo base_url('js/bootstrap.min.js') ?>></script>
+        <script type="text/javascript" src=<?php echo base_url('js/jquery.form.js') ?>></script>
         <!-- home é o aruivo JS que tem todos eventos referentes ao funcionamnto das abas e respectivos conteudos -->
         <script type="text/javascript" src=<?php echo base_url('js/abas.js') ?>></script>
 
