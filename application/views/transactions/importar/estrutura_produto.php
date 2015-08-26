@@ -1,78 +1,36 @@
-
 <div class='form'>
-	
 
-<?php
+    <?php 
+    	echo form_open_multipart('importar/estrutura_produto', array('class' => 'upload-esturtura-produto'));
+    	echo form_fieldset('Carregar nova estrutura de produto');
+    ?>
+		<!-- AJAX Response will be outputted on this DIV container -->
+	    <div class = "upload-messages-esturtura-produto"></div>
+        <input type="file" multiple = "multiple"  class = "form-control" name="uploadfile[]" /><br />
+        <input type="submit" name = "submit" value="Upload" class = "btn btn-primary" />
+       </fieldset>
+    </form>
 
-
-echo '<form method="post" action="" class="ajax_form" enctype="multipart/form-data">';
-
-echo form_fieldset('CImportar estrutura do produto');
-
-?>
-<?php 
-	echo  validation_errors('<div class="alert alert-danger" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>','</div>');
- ?>
-
-<?php 
-if($this->session->flashdata('cadastrook')):
-    echo '<div class="alert alert-success">'.$this->session->flashdata('cadastrook').'</div>';
-endif;
-
-echo form_label('User ID');
-echo form_input(array('name'=>'username'),  '','autofocus')."<br>";
-
-echo form_label('Nome');
-echo form_input(array('name'=>'dsc_name'),  '')."<br>";
-
-echo form_label('Matrícula');
-echo form_input(array('name'=>'dsc_matricula'),  '')."<br>";
-
-echo form_label('Perfil');
-echo form_dropdown('id_user_roles', $roles ,'3', 1)."<br>";
-
-echo form_label('Status');
-echo form_dropdown('ativo',  array("A"=>"Ativo", "I"=>"Inativo"),'A', 1)."<br>";
-
-echo form_hidden(array('name'=>'dt_added'),  date("d/m/y H:i:s"));
-
-echo form_hidden(array('name'=>'dt_updated'),  date("d/m/y H:i:s"));
-
-echo form_hidden('password', md5(123));
-echo form_label('');
-echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Cadastrar', 'type'=>'submit'))."<br>";
-
-echo form_fieldset_close();
-echo form_close();
-
-?>
 </div>
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
-<script>
-	$(".submit").click(function(){
-		var numtab = $(this).closest("div").attr("numtab");
-		
-		$('.ajax_form').submit(function(){
-				
-			var dados = $( this ).serialize();
+<script>                    
+    jQuery(document).ready(function($) {
 
-			$.ajax({
-				type: "POST",
-				url: "usuario/create",
-				data: dados,
-				success: function( data )
-				{
-					alert('deu certo   ' + numTran);
-					$('div[numtab="'+ numTran +'"] div').remove();
-					$('div[numtab="'+ numTran +'"]').append(data);
-				}
-			});
+        var options = {
+            beforeSend: function(){
+                // Replace this with your loading gif image
+                $(".upload-messages-esturtura-produto").html('<p><img src = "<?php echo base_url() ?>img/sistema/backgroung/loading2.gif" class = "loader" /></p>');
+            },
+            complete: function(response){
+                // Output AJAX response to the div container
+                $(".upload-messages-esturtura-produto").html(response.responseText);
+            }
+        };  
+        // Submit the form
+        $(".upload-esturtura-produto").ajaxForm(options);  
 
-			return false;
-		});
-	});
+        return false;
+        
+    });
 </script>
-
