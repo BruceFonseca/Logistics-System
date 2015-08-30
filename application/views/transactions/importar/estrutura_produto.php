@@ -10,7 +10,6 @@
         <input type="submit" name = "submit" value="Carregar" class = "submit-form" />
        </fieldset>
     </form>
-
 </div>
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
@@ -20,7 +19,7 @@
         var options = {
             beforeSend: function(){
                 // Replace this with your loading gif image
-                $(".upload-messages-esturtura-produto").html('<p><img src = "<?php echo base_url() ?>img/sistema/backgroung/loading2.gif" class = "loader" /></p>');
+                $(".upload-messages-esturtura-produto").html('<p><img src = "./img/sistema/background/loading2.gif" class = "loader" /></p>');
             },
             complete: function(response){
                 // Output AJAX response to the div container

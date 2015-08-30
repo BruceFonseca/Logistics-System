@@ -22,7 +22,7 @@
         var options = {
             beforeSend: function(){
                 // Replace this with your loading gif image
-                $(".upload-messages-ordem-producao").html('<p><img src = "<?php echo base_url() ?>img/sistema/backgroung/loading2.gif" class = "loader" /></p>');
+                $(".upload-messages-ordem-producao").html('<p><img src = "./img/sistema/background/loading2.gif" class = "loader" /></p>');
             },
             complete: function(response){
                 // Output AJAX response to the div container
