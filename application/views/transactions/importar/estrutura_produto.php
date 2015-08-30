@@ -1,7 +1,7 @@
 <div class='form'>
 
     <?php 
-    	echo form_open_multipart('importar/estrutura_produto', array('class' => 'upload-esturtura-produto'));
+    	echo form_open_multipart('estrutura_produto/importar', array('class' => 'upload-esturtura-produto'));
     	echo form_fieldset('Carregar nova estrutura de produto');
     ?>
 		<!-- AJAX Response will be outputted on this DIV container -->
