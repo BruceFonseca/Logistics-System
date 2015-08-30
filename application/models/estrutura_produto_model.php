@@ -16,6 +16,7 @@ class Estrutura_produto_model extends CI_Model{
 		$col = 1;
 
 		if ($numCols != 97){
+
 			//97 é o numero de colunas do arquivo de estrutura 
 			
 			$msg = "O numero de colunas do arquivo não corresponde ao numero necessário";
@@ -42,6 +43,10 @@ class Estrutura_produto_model extends CI_Model{
 	}
 
 	public function importar_estrutura_produto(){
+		
+		$sql = "DELETE from estrutura";
+
+		$this->db->query($sql);
 
 		// function que utilizará a function "importar_corpo($cd_prod, $cd_comp, $ds_comp, $qtde)"
 		// para carregar todos componentes de cada produto, que atualmente estão disponivilizados
@@ -54,35 +59,34 @@ class Estrutura_produto_model extends CI_Model{
 
 		// importar_corpo($cd_prod, $cd_comp, $ds_comp, $qtde)
 
-		// $this->importar_corpo('1', '2', 'Corpo', '4' );
+		$this->importar_corpo('1', '2', 'Corpo', '4' );
 		$this->importar_corpo('1', '5', 'Tampa Comp', '7' );
-		// $this->importar_corpo('1', '8', 'Rotor', '10' );
-		// $this->importar_corpo('1', '11', 'Estator/ Lâmina', '13' );
-		// $this->importar_corpo('1', '14', 'Bloco Usinado', '16' );
-		// $this->importar_corpo('1', '17', 'Eixo Excentrico Usinado', '19' );
-		// $this->importar_corpo('1', '20', 'Tampa Cilindro', '22' );
-		// $this->importar_corpo('1', '23', 'Pistão Bruto', '25' );
-		// $this->importar_corpo('1', '26', 'Passador Descarga', '28' );
-		// $this->importar_corpo('1', '29', 'Pacote rotor', '31' );
-		// $this->importar_corpo('1', '32', 'Placa Valvula', '34' );
-		// $this->importar_corpo('1', '35', 'Camara de sucção', '37' );
-		// $this->importar_corpo('1', '38', 'Tampa Camara', '40' );
-		// $this->importar_corpo('1', '41', 'Passador proc suc', '43' );
-		// $this->importar_corpo('1', '44', 'Helicóide', '46' );
-		// $this->importar_corpo('1', '47', 'Pino pistão', '49' );
-		// $this->importar_corpo('1', '50', 'Junta Cilindro', '52' );
-		// $this->importar_corpo('1', '53', 'Biela', '55' );
-		// $this->importar_corpo('1', '56', 'Junta Placa Valvula', '58' );
-		// $this->importar_corpo('1', '59', 'Passador processo Minis', '61' );
-		// $this->importar_corpo('1', '62', 'placa valvula sinter bruta', '64' );
-		// $this->importar_corpo('1', '65', 'Fio', '67' );
-		// $this->importar_corpo('1', '68', 'Pistão bruto', '70' );
-		// $this->importar_corpo('1', '71', 'Conjunto suporte de mola', '73' );
-		// $this->importar_corpo('1', '74', 'Tampa soldado', '76' );
-		// $this->importar_corpo('1', '74', 'Tampa soldado', '76' );
-		// $this->importar_corpo('1', '77', 'E1', '79' );
-		// $this->importar_corpo('1', '80', 'E2', '82' );
-		// $this->importar_corpo('1', '83', 'E3', '85' );
+		$this->importar_corpo('1', '8', 'Rotor', '10' );
+		$this->importar_corpo('1', '11', 'Estator/ Lâmina', '13' );
+		$this->importar_corpo('1', '14', 'Bloco Usinado', '16' );
+		$this->importar_corpo('1', '17', 'Eixo Excentrico Usinado', '19' );
+		$this->importar_corpo('1', '20', 'Tampa Cilindro', '22' );
+		$this->importar_corpo('1', '23', 'Pistão Bruto', '25' );
+		$this->importar_corpo('1', '26', 'Passador Descarga', '28' );
+		$this->importar_corpo('1', '29', 'Pacote rotor', '31' );
+		$this->importar_corpo('1', '32', 'Placa Valvula', '34' );
+		$this->importar_corpo('1', '35', 'Camara de sucção', '37' );
+		$this->importar_corpo('1', '38', 'Tampa Camara', '40' );
+		$this->importar_corpo('1', '41', 'Passador proc suc', '43' );
+		$this->importar_corpo('1', '44', 'Helicóide', '46' );
+		$this->importar_corpo('1', '47', 'Pino pistão', '49' );
+		$this->importar_corpo('1', '50', 'Junta Cilindro', '52' );
+		$this->importar_corpo('1', '53', 'Biela', '55' );
+		$this->importar_corpo('1', '56', 'Junta Placa Valvula', '58' );
+		$this->importar_corpo('1', '59', 'Passador processo Minis', '61' );
+		$this->importar_corpo('1', '62', 'placa valvula sinter bruta', '64' );
+		$this->importar_corpo('1', '65', 'Fio', '67' );
+		$this->importar_corpo('1', '68', 'Pistão bruto', '70' );
+		$this->importar_corpo('1', '71', 'Conjunto suporte de mola', '73' );
+		$this->importar_corpo('1', '74', 'Tampa soldado', '76' );
+		$this->importar_corpo('1', '77', 'E1', '79' );
+		$this->importar_corpo('1', '80', 'E2', '82' );
+		$this->importar_corpo('1', '83', 'E3', '85' );
 	}
 
 	public function importar_corpo($cd_prod, $cd_comp, $ds_comp, $qtde){

@@ -19,7 +19,7 @@
         var options = {
             beforeSend: function(){
                 // Replace this with your loading gif image
-                $(".upload-messages-esturtura-produto").html('<p><img src = "./img/sistema/background/loading2.gif" class = "loader" /></p>');
+                $(".upload-messages-esturtura-produto").html('<p><img src = "./img/sistema/background/loading.gif" class = "loader" /> &nbsp  Aguarde, arquivo sendo carregado...</p>');
             },
             complete: function(response){
                 // Output AJAX response to the div container

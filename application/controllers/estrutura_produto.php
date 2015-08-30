@@ -40,21 +40,23 @@ class Estrutura_produto extends CI_Controller{
                 $this->estrutura_produto_model->verificar($arquivo) == TRUE;
                 //se importado, então .... importado com sucesso
 
-                echo '<div class="alert alert-success">' . count($data['upload_data']) . ' Arquivo(s) carregado com sucesso.</div>';
+                echo '<div class="alert alert-success">' . ' Arquivo carregado com sucesso.</div>';
                 
             } else {    
+                
                 // Output the errors
-                $errors = array('error' => $this->upload->display_errors('<div class="alert alert-danger" role="alert">
-                                                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                                            <span class="sr-only">Error:</span>', '</div>'));               
+                $errors = $this->upload->display_errors('<div class="alert alert-danger" role="alert">
+                                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                        <span class="sr-only">Error:</span>', '<br>Favor inserir um arquivo com extensão <strong>.xls</strong></div>');               
+                echo $errors;
             }
             exit();
         } 
 
 		$dados = array(
-            'tela'=> 'estrutura_produto',
-            'pasta'=> 'importar',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
-             );
+            'tela'=> 'importar',
+            'pasta'=> 'estrutura_produto',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+        );
         
         $this->load->view('conteudo', $dados );
 		
