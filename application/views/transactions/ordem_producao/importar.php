@@ -1,18 +1,15 @@
-
 <div class='form'>
 
     <?php 
-    	echo form_open_multipart('importar/ordem_producao', array('class' => 'upload-ordem-producao'));
+    	echo form_open_multipart('ordem_producao/importar', array('class' => 'upload-ordem-producao'));
     	echo form_fieldset('Carregar nova ordem de produção');
     ?>
 		<!-- AJAX Response will be outputted on this DIV container -->
 	    <div class = "upload-messages-ordem-producao"></div>
         <input type="file" multiple = "multiple"  class = "form-control" name="uploadfile[]" /><br />
         <input type="submit" name = "submit" value="Carregar" class = "submit-form" />
-
-    </fieldset>
+       </fieldset>
     </form>
-
 </div>
 
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
@@ -22,7 +19,7 @@
         var options = {
             beforeSend: function(){
                 // Replace this with your loading gif image
-                $(".upload-messages-ordem-producao").html('<p><img src = "./img/sistema/background/loading2.gif" class = "loader" /></p>');
+                $(".upload-messages-ordem-producao").html('<p><img src = "./img/sistema/background/loading.gif" class = "loader" /> &nbsp  Aguarde, arquivo sendo carregado...</p>');
             },
             complete: function(response){
                 // Output AJAX response to the div container
@@ -36,5 +33,3 @@
         
     });
 </script>
-
-
