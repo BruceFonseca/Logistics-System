@@ -2,6 +2,22 @@
 
 class Ordem_producao_model extends CI_Model{
 
+	public function get_all(){
+          
+      $query = 'SELECT cd_linha, 
+      				   cd_of, 
+      				   cd_produto, 
+      				   cd_status, 
+      				   qt_planejada, 
+      				   qt_produzida,
+      				   dt_inicio_plan,
+      				   dt_termino_plan
+      			FROM ordem_producao';     
+         
+        return $this->db->query($query);
+    }
+
+
 	public function verificar($arquivo){
 
 		$this->excel_reader->read('./uploads/' . $arquivo );

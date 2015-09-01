@@ -10,10 +10,22 @@ class Ordem_producao extends CI_Controller{
 	   $this->load->helper('array');//ajuda a passar dados para o model
 	   $this->load->library('form_validation');
 	   $this->load->library('session');
+       $this->load->library('table');//carrega tabela ;
 	   $this->load->database();//carrega o banco de dados para fazer operações no banco
 	   $this->load->model('ordem_producao_model');//carrega o model
 	   $this->load->library('excel_reader');//carrega library para ler o excel
 	}
+
+    public function retrieve() {
+
+        // $cd_of= isset($cells[$lin]['2']) ? $cells[$lin]['2'] : NULL; // se o componente não existe, então é setado NULL
+        $dados = array(
+            'tela'=> 'retrieve',
+            'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'status'=> $this->ordem_producao_model->get_all()->result(),
+             );
+        $this->load->view('conteudo', $dados);
+    }
 
 	function importar() {
 		
@@ -60,8 +72,6 @@ class Ordem_producao extends CI_Controller{
         
         $this->load->view('conteudo', $dados );
 		
-	}
-
-
+	}//fim importar
 
 }//fim da clase

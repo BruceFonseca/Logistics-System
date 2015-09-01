@@ -122,7 +122,7 @@
 }
 
 
-.retrieve-usuarios{
+.retrieve-usuarios, .retrieve-ordem-producao{
 	width: 600px;
 	padding: 20px;
 	border-radius: 4px;
@@ -131,7 +131,7 @@
     display: table;
 }
 
-.retrieve-usuarios h2{
+.retrieve-usuarios h2, .retrieve-ordem-producao h2{
 	margin-top: 0;
 	-moz-border-bottom-colors: none;
     -moz-border-left-colors: none;

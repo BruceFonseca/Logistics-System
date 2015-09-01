@@ -17,14 +17,7 @@ class Usuario extends CI_Controller{
         
     }
     
-    public function index(){
-        $dados = array('titulo'=> 'Cadastro de Tipo de Usuário',
-                        'tela'=> 'status',
-            );
-        $this->load->view('status',$dados);
-        
-    }
-    
+   
     public function  create(){   
         
         // validação dos dados recebidos do formulário
@@ -58,11 +51,13 @@ class Usuario extends CI_Controller{
     }
     
     public function retrieve() {
+
         $dados = array(
             'tela'=> 'retrieve',
             'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
             'status'=> $this->usuario_model->get_all()->result(),
              );
+        
         $this->load->view('conteudo', $dados);
     }
     
