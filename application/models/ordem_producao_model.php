@@ -12,9 +12,33 @@ class Ordem_producao_model extends CI_Model{
       				   qt_produzida,
       				   dt_inicio_plan,
       				   dt_termino_plan
-      			FROM ordem_producao';     
+      			FROM ordem_producao 
+      			ORDER BY dt_inicio_plan ';     
          
         return $this->db->query($query);
+    }
+    
+    public function get_with_condition($condicao = NULL){
+
+    	$query = 'SELECT cd_linha, 
+      				   cd_of, 
+      				   cd_produto, 
+      				   cd_status, 
+      				   qt_planejada, 
+      				   qt_produzida,
+      				   dt_inicio_plan,
+      				   dt_termino_plan
+      			FROM ordem_producao '; 
+
+      	$order = ' ORDER BY dt_inicio_plan ';
+
+      	if($condicao != NULL){
+      		$query = $query . $condicao . $order;
+      	}else{
+      		$query = $query . $condicao;
+      	}
+
+      	return $this->db->query($query);
     }
 
 

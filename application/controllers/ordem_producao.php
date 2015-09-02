@@ -17,14 +17,36 @@ class Ordem_producao extends CI_Controller{
 	}
 
     public function retrieve() {
+        
+        if($this->input->post()){
 
-        // $cd_of= isset($cells[$lin]['2']) ? $cells[$lin]['2'] : NULL; // se o componente não existe, então é setado NULL
-        $dados = array(
-            'tela'=> 'retrieve',
-            'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
-            'status'=> $this->ordem_producao_model->get_all()->result(),
+            $linha= $this->input->post('linha');
+            $of= $this->input->post('OF');
+            $produto= $this->input->post('produto');
+            
+            $where = Array();
+
+            if($linha != " "){$where[]   = " `cd_linha` LIKE '%".trim($linha)."%'";}
+            if($of != " "){$where[]      = " cd_of LIKE '%".trim($of)."%'";}
+            if($produto != " "){$where[] = " cd_produto LIKE '"."%".trim($produto)."%'";}
+
+            $condicao = " WHERE " . implode( ' AND ',$where );
+
+            $dados = array(
+                'tela'=> 'retrieve_com_filtro',
+                'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+                'status'=> $this->ordem_producao_model->get_with_condition($condicao)->result(),
              );
-        $this->load->view('conteudo', $dados);
+
+            $this->load->view('conteudo', $dados);
+        }else{
+            $dados = array(
+                'tela'=> 'retrieve',
+                'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+                'status'=> $this->ordem_producao_model->get_all()->result(),
+                 );
+            $this->load->view('conteudo', $dados);
+        }
     }
 
 	function importar() {
