@@ -1,13 +1,16 @@
 <?php
 
 
-$this->table->set_heading('Linha', 'OF', 'Produto','Status','Qtd. plan.',' Qtd. prod', 'Dt_Inic.', 'Dt_Term.');
+$this->table->set_heading('Abrir','Linha', 'OF', 'Produto','Status','Qtd. plan.',' Qtd. prod', 'Dt_Inic.', 'Dt_Term.');
 
 foreach ($status as $linha):
+
+    $of= array('data'=> $linha->cd_of, 'class'=>'cd-of');
+
     $this->table->add_row(
     '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>',
     $linha->cd_linha, 
-    $linha->cd_of, 
+    $of, 
     $linha->cd_produto, 
     $linha->cd_status, 
     $linha->qt_planejada,
@@ -37,7 +40,6 @@ echo '</div>';
 
 ?>
 
-
 <!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
 <script>
     $(".filtros input").keyup(function(){
@@ -62,5 +64,7 @@ echo '</div>';
                 }
             });
     });
+
+    
 </script>
 

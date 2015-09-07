@@ -45,7 +45,6 @@ class Estrutura_produto_model extends CI_Model{
 	public function importar_estrutura_produto(){
 		
 		$sql = "DELETE from estrutura";
-
 		$this->db->query($sql);
 
 		// function que utilizará a function "importar_corpo($cd_prod, $cd_comp, $ds_comp, $qtde)"
@@ -103,7 +102,7 @@ class Estrutura_produto_model extends CI_Model{
 
 		for ($i= $lin; $i<= $numRows; $i++)
 		{
-			$cd_produto= $cells[$lin][$cd_prod];
+			$cd_produto= substr($cells[$lin][$cd_prod], 0, 9);
 			$cd_componente= isset($cells[$lin][$cd_comp]) ? $cells[$lin][$cd_comp] : NULL; // se o componente não existe, então é setado NULL
 			$dsc_componente= $ds_comp;
 			$quantidade= isset($cells[$lin][$qtde]) ? $cells[$lin][$qtde] : NULL;  // se a quantidade não existe, então é setado NULL

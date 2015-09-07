@@ -11,16 +11,7 @@ class Usuario_model extends CI_Model{
         endif;
             
     }
-
-    // public function do_update($dados=NULL, $condicao=NULL){
-
-    //     if ($dados != NULL && $condicao != NULL):
-    //         $this->db->update('users',$dados, $condicao);
-    //         $this->session->set_flashdata('cadastrook','Cadastro efetuado com sucesso');
-    //         redirect('usuario/update');
-    //     endif;
-    // }
-
+    
     public function do_update($dados=NULL, $condicao=NULL){
         if ($dados != NULL && $condicao != NULL):
             $this->db->update('users',$dados, $condicao);

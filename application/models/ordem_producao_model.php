@@ -18,6 +18,37 @@ class Ordem_producao_model extends CI_Model{
         return $this->db->query($query);
     }
     
+    public function get_produto_of($of, $produto){
+    	$query = 'SELECT 
+						 qt_planejada, 
+						 e.cd_componente as componente, 
+						 dsc_componente,
+						 e.quantidade as qt_componente
+				FROM ordem_producao o
+				INNER JOIN estrutura e ON o.cd_produto = e.cd_produto
+				WHERE cd_of = ' . $of .
+				' AND o.cd_produto = ' . $produto .
+				' ORDER BY o.cd_produto '; 
+
+		return $this->db->query($query);
+    }
+
+    public function get_dados_of($of, $produto){
+    	$query = 'SELECT 
+    				   cd_linha, 
+      				   cd_of, 
+      				   cd_produto, 
+      				   cd_status, 
+      				   qt_planejada, 
+      				   dt_inicio_plan,
+      				   dt_termino_plan
+      			FROM ordem_producao 
+      			WHERE cd_of = ' . $of . ' AND cd_produto = ' . $produto ; 
+    	
+      	return $this->db->query($query);
+    }
+
+
     public function get_with_condition($condicao = NULL){
 
     	$query = 'SELECT cd_linha, 
@@ -110,7 +141,7 @@ class Ordem_producao_model extends CI_Model{
 		{
 			$cd_linha= $cells[$lin]['1'];
 			$cd_of= isset($cells[$lin]['2']) ? $cells[$lin]['2'] : NULL; // se o componente não existe, então é setado NULL
-			$cd_produto= $cells[$lin]['3'];
+			$cd_produto= substr($cells[$lin]['3'], 0, 9);
 			$cd_status= $cells[$lin]['4'];
 			$qt_planejada= $cells[$lin]['5'];
 			$qt_produzida= $cells[$lin]['6'];

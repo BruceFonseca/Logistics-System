@@ -16,6 +16,23 @@ class Ordem_producao extends CI_Controller{
 	   $this->load->library('excel_reader');//carrega library para ler o excel
 	}
 
+    public function retrieve_OF() {
+
+        $this->output->enable_profiler(false);//MODO NATIVO DE DEBUG CODEIGNITER. MUDE PARA "TRUE" PARA HABILITAR
+        $of= $this->input->post('of');
+        $produto= $this->input->post('produto');
+
+        $dados = array(
+            'dados_of'=> $this->ordem_producao_model->get_dados_of($of, $produto)->row(),
+            // 'dados_of'=> $this->ordem_producao_model->get_dados_of($of, $produto)->result_array(),
+            'tela'=> 'retrieve_of',
+            'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'status'=> $this->ordem_producao_model->get_produto_of($of, $produto)->result(),
+             );
+
+        $this->load->view('conteudo', $dados);
+    }
+
     public function retrieve() {
         
         if($this->input->post()){
@@ -39,7 +56,9 @@ class Ordem_producao extends CI_Controller{
              );
 
             $this->load->view('conteudo', $dados);
+
         }else{
+
             $dados = array(
                 'tela'=> 'retrieve',
                 'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
