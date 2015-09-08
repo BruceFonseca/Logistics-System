@@ -4,12 +4,13 @@ class Apontamento_model extends CI_Model{
     
     public function do_insert($dados=NULL){            
         
-        if ($dados != NULL):
+        if ($dados != NULL){
             $this->db->insert('apontamento',$dados);
-            echo 'cadastrook','Cadastro efetuado com sucesso';
-            pd($dados);
-        endif;
-            
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
     }
 
    
@@ -22,8 +23,11 @@ class Apontamento_model extends CI_Model{
     
     public function get_hist_apon($of, $produto, $componente){
         
-        $query = 'SELECT * FROM apontamento 
-        WHERE cd_of = ' . $of . ' AND  cd_produto = ' . $produto . ' AND  cd_componente = ' . $componente;
+        $query = 'SELECT dt_apontamento, a.username as usuario, u.dsc_name as nome, cd_motivo, qt_apontada 
+                    FROM apontamento a
+                    INNER JOIN users u ON a.username = u.username
+                    WHERE cd_of = ' . $of . ' AND  cd_produto = ' . $produto . ' AND  cd_componente = ' . $componente . 
+                    ' ORDER BY dt_apontamento DESC ';
                        
         return $this->db->query($query);
     }

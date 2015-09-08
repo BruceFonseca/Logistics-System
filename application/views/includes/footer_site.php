@@ -1,9 +1,9 @@
 			
 
 			<footer>
-				<div id="contato">
+				<!-- <div id="contato">
                     Developed by Bruce Fonseca
-				</div>
+				</div> -->
 			</footer>
 		</main>
     </body>

@@ -220,6 +220,7 @@ td {
     padding: 5px;
     position: relative;
     transition: all 300ms;
+    text-align: center;
 }
 
 td span{
@@ -310,3 +311,12 @@ tbody:hover tr:hover td {
             margin-left: 10%;
       }
   }
+.body-table-abastecimento{
+    margin: 0 auto;
+}
+
+.alert.alert-success{
+    display: table;
+    position: absolute;
+    z-index: 320;
+}

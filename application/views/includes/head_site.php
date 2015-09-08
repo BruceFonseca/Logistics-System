@@ -21,4 +21,6 @@
     <body>
 		<main>	
          <div class="apontamento">...</div>  <!-- esta tag receberá os balores de apontamento -->
+        <!-- <div class="container-apontamento"> -->
          <div class="dados_componente"></div>
+        <!-- </div> -->

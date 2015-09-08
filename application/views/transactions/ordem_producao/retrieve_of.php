@@ -72,7 +72,7 @@ $('.retrieve-componentes-produto .body-table tr td span').on('click', function()
                 $('.apontamento').show();
 
                 $('.dados_componente').css( "display", "table" );
-                $('.dados_componente').css( "position", "fixed" );
+                $('.dados_componente').css( "position", "absolute" );
                 $('.dados_componente').append(response);
             }
         });

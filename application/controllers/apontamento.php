@@ -15,38 +15,67 @@ class Apontamento extends CI_Controller{
 	   $this->load->library('table');//carrega tabela 
 	   $this->load->model('apontamento_model');//carrega o model
 	   $this->load->model('ordem_producao_model');//carrega o model
+	   date_default_timezone_set('America/Sao_Paulo');//define o timezone
+	}
+
+	public function apontar_componente(){
+
+
+		$of= 			trim($this->input->post('of'));
+        $produto= 		trim($this->input->post('produto'));
+        $componente = 	trim($this->input->post('componente'));
+        $quantidade = 	(int) trim($this->input->post('quantidade'));
+        $motivo = 		trim($this->input->post('motivo'));
+
+
+        //se o motivo for igual a "D" (desabastecer), altera o valor para negativo
+        if($motivo == "D"){ $quantidade = ((int) $quantidade) * (-1);}
+
+        if((int) $quantidade != 0){
+
+        	$session_data = $this->session->userdata('logged_in');
+
+        	$dados = array(
+        		'cd_of'=> $of,
+        		'cd_produto'=> $produto,
+        		'cd_componente'=> $componente,
+        		'qt_apontada'=> $quantidade,
+        		'dt_apontamento'=> date('YmdHis',now()),
+        		'username'=> $session_data['username'],
+        		'cd_motivo'=> $motivo,
+        		);
+        	
+        	if($this->apontamento_model->do_insert($dados)==TRUE){
+        		echo '<div class="alert alert-success">' . ' Arquivo apontado com sucesso.</div>';
+        	}else{
+        		echo '<div class="alert alert-danger" role="alert">
+                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                     <span class="sr-only">Error:</span>FAvor verificar dados inseridos</div>';
+        	}
+
+        }
+
+        $dados = array(
+        	'dados_of'=> $this->ordem_producao_model->get_dados_of($of, $produto)->row(),
+        	'cd_componente'=> $componente ,
+            'tela'=> 'apontar',
+            'pasta'=> 'apontamento',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'status'=> $this->apontamento_model->get_hist_apon($of, $produto, $componente)->result(),
+             );
+
+        $this->load->view('conteudo', $dados);
 	}
 
 	public function apontar(){
 
 		$this->output->enable_profiler(FALSE);//MODO NATIVO DE DEBUG CODEIGNITER. MUDE PARA "TRUE" PARA HABILITAR
 
-		$of= trim($this->input->post('of'));
-        $produto= trim($this->input->post('produto'));
-        $componente = trim($this->input->post('componente'));
-        
-        $quantidade = trim($this->input->post('quantidade'));
-        $motivo = trim($this->input->post('motivo'));
+		$of= 			trim($this->input->post('of'));
+        $produto= 		trim($this->input->post('produto'));
+        $componente = 	trim($this->input->post('componente'));
+        // $quantidade = 	(int) trim($this->input->post('quantidade'));
+        // $motivo = 		trim($this->input->post('motivo'));
 
-        //se o motivo for igual a "D" (desabastecer), altera o valor para negativo
-        if($motivo == "D"){ $quantidade = ((int) $quantidade) * (-1);}
-
-        //se existir a quan tidade, quer dizer que é um dados que o usuário está informando via post
-        //então deve fazer o insert no banco
-        if($quantidade){
-
-        	$dados = array(
-        		'cd_of'=> $of,
-        		'cd_produto'=> $produto,
-        		'cd_componente'=> $componente,
-        		'dt_apontada'=> mysql_real_escape_string(now()),
-        		'username'=> 'username',
-        		'cd_motivo'=> $motivo,
-        		);
-        	
-        	$this->apontamento_model->do_insert($dados);
-
-        }
 
         $dados = array(
         	'dados_of'=> $this->ordem_producao_model->get_dados_of($of, $produto)->row(),

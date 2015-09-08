@@ -1,9 +1,26 @@
+<?php 
+
+$this->table->set_heading( 'Dt_apontamento', 'Motivo', 'Quantidate', 'Username', 'Nome' );
+
+foreach ($status as $linha):
+    $motivo = $linha->cd_motivo == "A"? "Abastecimento": "Desabastecimento";
+
+    $this->table->add_row(
+    $linha->dt_apontamento,
+    $motivo,
+    $linha->qt_apontada,
+    $linha->usuario,
+    $linha->nome
+    );
+endforeach;
+
+ ?>
 
 <div class='form'>
 	
-<button type="button" class="btn btn-default" id="fechar-apontamento-componente">
-  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Fechar
-</button>
+	<button type="button" class="btn btn-default" id="fechar-apontamento-componente">
+	 	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Fechar
+	</button>
 
 <?php
 
@@ -13,9 +30,11 @@ echo '<form method="post" action="" class="apontamento-componente">';
 
 echo form_fieldset('Apontar componente');
 
-	echo  validation_errors('<div class="alert alert-danger" role="alert">
+echo  validation_errors('<div class="alert alert-danger" role="alert">
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>','</div>');
+
+echo '<div class="msg-apontamento"></div>';
   
 echo form_label('OF');
 echo form_input(array('name'=>'of', 'class'=>'of', 'disabled'=>'TRUE'),  set_value('of', $dados_of->cd_of),'bloqued');
@@ -45,11 +64,16 @@ echo form_close();
 ?>
 </div>
 
+<div class="body-table-abastecimento">
+    <?php echo $this->table->generate(); ?>
+</div>
+
 <script>
 	$('#fechar-apontamento-componente').on('click', function(){
 		$('.apontamento').hide();
 		$('.dados_componente').hide();
 		$('.dados_componente .form').remove();
+		$('.dados_componente .body-table-abastecimento').remove();
 		$('.dados_componente script').remove();
 	});
 
@@ -62,26 +86,25 @@ echo form_close();
 	    var quantidade = $(this).closest('.apontamento-componente').find('input[class="quantidade"]').val()
 	    var motivo = $(this).closest('.apontamento-componente').find('select[class="motivo"]').val()
 
-	    // var height = $('.retrieve-componentes-produto').height());
-
-	    var controller = 'apontamento/apontar';
-
-	    // alert(cd_of + cd_produto + controller + cd_componente + 'dasdfgas   ' + motivo);
+	    var controller = 'apontamento/apontar_componente';
 
 		$('.apontamento-componente').submit(function(){
 
 			$.ajax({
 				type: "POST",
 				url: controller,
-				data:   'of='+ cd_of + 
-						' & produto= ' + cd_produto  + 
-						' & componente= ' + cd_componente +
-						' & quantidade= ' + quantidade +
-						' & motivo= ' + motivo,
+				data:   'of='				+cd_of + 
+						' & produto= ' 		+cd_produto  + 
+						' & componente= ' 	+ cd_componente +
+						' & quantidade= ' 	+ quantidade +
+						' & motivo= '		+ motivo,
 				
 				success: function( data )
 				{
-					alert('deu certo   ' + data);
+					$('.dados_componente .form').remove();
+					$('.dados_componente script').remove();
+					$('.dados_componente div').remove();
+					$('.dados_componente').append(data);
 				}
 			});
 
