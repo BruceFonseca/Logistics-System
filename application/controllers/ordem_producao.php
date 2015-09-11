@@ -14,6 +14,7 @@ class Ordem_producao extends CI_Controller{
 	   $this->load->database();//carrega o banco de dados para fazer operações no banco
 	   $this->load->model('ordem_producao_model');//carrega o model
 	   $this->load->library('excel_reader');//carrega library para ler o excel
+       date_default_timezone_set('America/Sao_Paulo');//define o timezone
 	}
 
     public function retrieve_OF() {

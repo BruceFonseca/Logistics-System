@@ -14,7 +14,7 @@ class Usuario extends CI_Controller{
        $this->load->library('table');//carrega tabela 
        $this->load->model('usuario_model');//carrega o model
        $this->load->model('users_roles_model');//carrega o model
-        
+        date_default_timezone_set('America/Sao_Paulo');//define o timezone
     }
     
    

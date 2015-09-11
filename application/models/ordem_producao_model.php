@@ -19,7 +19,12 @@ class Ordem_producao_model extends CI_Model{
     }
     
     public function get_produto_of($of, $produto){
-    	$query = 'SELECT 
+    	$query = 'SELECT (SELECT SUM(qt_apontada) 
+							FROM apontamento a 
+							WHERE a.cd_componente = e.cd_componente 
+							AND a.cd_of = o.cd_of 
+							AND a.cd_produto = o.cd_produto
+						 ) as qt_abastecido,
 						 qt_planejada, 
 						 e.cd_componente as componente, 
 						 dsc_componente,
@@ -32,6 +37,21 @@ class Ordem_producao_model extends CI_Model{
 
 		return $this->db->query($query);
     }
+    //back up
+  //   public function get_produto_of($of, $produto){
+  //   	$query = 'SELECT 
+		// 				 qt_planejada, 
+		// 				 e.cd_componente as componente, 
+		// 				 dsc_componente,
+		// 				 e.quantidade as qt_componente
+		// 		FROM ordem_producao o
+		// 		INNER JOIN estrutura e ON o.cd_produto = e.cd_produto
+		// 		WHERE cd_of = ' . $of .
+		// 		' AND o.cd_produto = ' . $produto .
+		// 		' ORDER BY o.cd_produto '; 
+
+		// return $this->db->query($query);
+  //   }
 
     public function get_dados_of($of, $produto){
     	$query = 'SELECT 

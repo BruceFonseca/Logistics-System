@@ -2,18 +2,20 @@
 
 
 
-$this->table->set_heading('Abrir', 'Componente', 'Descrição' , 'qt_componente', 'qt_planejada' );
+$this->table->set_heading('Abrir', 'Componente', 'Descrição' , 'qt_componente', 'qt_necessaria', 'qt_abastecido' );
 
 foreach ($status as $linha):
     
     $cd_componente = array('data'=> $linha->componente, 'class'=>'cd-componente');
+    $qt_necessaria = (int)$linha->qt_componente * (int)  $linha->qt_planejada;
 
     $this->table->add_row(
     '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>',
     $cd_componente,
     $linha->dsc_componente,
     $linha->qt_componente,
-    $linha->qt_planejada
+    $qt_necessaria,
+    $linha->qt_abastecido
     );
 endforeach;
 

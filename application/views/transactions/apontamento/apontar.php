@@ -63,7 +63,7 @@ echo form_close();
 
 ?>
 </div>
-
+<!-- <h3>Histórico de abastecimento</h3> -->
 <div class="body-table-abastecimento">
     <?php echo $this->table->generate(); ?>
 </div>
