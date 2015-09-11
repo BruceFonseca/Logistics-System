@@ -21,7 +21,7 @@ for($i=0; $i < count($users_roles); $i++){
   <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span>','</div>');
  ?>
-
+<div class='msg-rest-senha'></div>
 <?php 
 
 
@@ -44,7 +44,8 @@ echo form_label('Status');
 echo form_dropdown('ativo',  array("A"=>"Ativo", "I"=>"Inativo"), set_value('ativo', $query->status), 1)."<br>";
 
 echo form_label('');
-echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Salvar', 'type'=>'submit'))."<br>";
+echo form_button(array('name'=>'cadastrar', 'class'=>'submit', 'id'=>'submit','content'=>'Salvar', 'type'=>'submit'));
+echo form_button(array('name'=>'reset-senha', 'class'=>'reset-senha', 'id'=>'reset-senha','content'=>'Reset senha', 'type'=>'submit'))."<br>";
 
 echo form_fieldset_close();
 echo form_close();
@@ -58,7 +59,7 @@ echo form_close();
 		// var numtab = $(this).closest("div").attr("numtab");
 		// var numtab = $(this).closest("div").attr("numtab");
 		var id_usuario = $(this).closest('fieldset').find('input.id-usuario').val();
-		// alert('deu certo   ' + id_usuario );
+
 		$('.ajax_form').submit(function(){
 				
 			var dados = $( this ).serialize();
@@ -69,7 +70,6 @@ echo form_close();
 				data: dados,
 				success: function( data )
 				{
-					// alert('deu certo   ' + numTran);
 					$('div[numtab="'+ numTran +'"] div').remove();
 					$('div[numtab="'+ numTran +'"]').append(data);
 				}
@@ -77,5 +77,21 @@ echo form_close();
 
 			return false;
 		});
+	});
+
+	$(".reset-senha").click(function(){
+		var id_usuario = $(this).closest('fieldset').find('input.id-usuario').val();
+
+			$.ajax({
+				type: "POST",
+				url: "usuario/reset_senha",
+				data: 'usuario=' + id_usuario,
+				success: function( response )
+				{
+					$('.ajax_form fieldset .msg-rest-senha').append(response);
+				}
+			});
+
+			return false;
 	});
 </script>

@@ -70,7 +70,6 @@ echo form_close();
 				data: dados,
 				success: function( data )
 				{
-					alert('deu certo   ' + numTran);
 					$('div[numtab="'+ numTran +'"] div').remove();
 					$('div[numtab="'+ numTran +'"]').append(data);
 				}

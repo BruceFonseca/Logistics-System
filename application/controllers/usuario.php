@@ -108,5 +108,20 @@ class Usuario extends CI_Controller{
         
         $this->load->view('conteudo', $dados );
     }
-    
+
+    public function  reset_senha(){   
+
+
+        if($this->input->post('usuario')){
+            
+            $id = (int) $this->input->post('usuario');
+            
+            $this->usuario_model->reset_senha($id);
+
+            echo '<div class="alert alert-success">Reset de senha efetuado com sucesso!!! <br> Nova senha : 123</div>';
+            exit();
+
+        }//fim do if
+    }
+       
 }//fim da classe    

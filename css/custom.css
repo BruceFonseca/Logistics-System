@@ -317,6 +317,5 @@ tbody:hover tr:hover td {
 
 .alert.alert-success{
     display: table;
-    position: absolute;
     z-index: 320;
 }

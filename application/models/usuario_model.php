@@ -35,6 +35,16 @@ class Usuario_model extends CI_Model{
 
         return $this->db->query($query);
     }
+
+    public function reset_senha($id){
+        $pass = md5(123); // senha 123
+
+        $query = "UPDATE users
+                  SET password = " . "'" . $pass ."'" .
+                 ' WHERE id = ' . $id;
+
+        $this->db->query($query);
+    }
     
 }
 
