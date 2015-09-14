@@ -46,5 +46,16 @@ class Usuario_model extends CI_Model{
         $this->db->query($query);
     }
     
+    public function trocar_senha($username, $nova_senha){
+
+
+        $pass = md5($nova_senha); //criptografa senha em md5
+
+        $query = "UPDATE users
+                  SET password = " . "'" . $pass ."'" .
+                 ' WHERE username = '. "'" . $username ."'";
+
+        $this->db->query($query);
+    }
 }
 

@@ -61,6 +61,7 @@ class Usuario extends CI_Controller{
         $this->load->view('conteudo', $dados);
     }
     
+
     public function  update(){   
 
     $flash_data = NULL;
@@ -71,43 +72,72 @@ class Usuario extends CI_Controller{
       
 
 
-    // recebe o id do usuário através da URL
-    $id = $this->uri->segment(3);
+        // recebe o id do usuário através da URL
+        $id = $this->uri->segment(3);
 
-    if($this->input->post('dsc_name')){
+        if($this->input->post('dsc_name')){
+            
+            //o $id é setado novamente quando vem por POST 
+            $id = $this->input->post('id');
+
+            $this->form_validation->set_rules('dsc_name','Nome','trim');
+
+            if ($this->form_validation->run()==TRUE):
+
+
+                $dados = elements(array(
+                                        'id',
+                                        'username',
+                                        'password',
+                                        'dsc_name',
+                                        'dsc_matricula', 
+                                        'id_user_roles',
+                                        'ativo',
+                                        'dt_updated'), $this->input->post());
+                $this->usuario_model->do_update($dados, array('id'=> $id));
+            endif;
+
+        }//fim do if
+
+    }
+
+    public function  trocar_senha(){ 
+
+        if($this->input->post('nova-senha')){
         
-        //o $id é setado novamente quando vem por POST 
-        $id = $this->input->post('id');
+            $nova_senha =  (string) trim($this->input->post('nova-senha'));
+            $confirmar_senha =  (string) trim($this->input->post('confirmar-senha'));
 
-        $this->form_validation->set_rules('dsc_name','Nome','trim');
+            if($nova_senha == $confirmar_senha){
 
-        if ($this->form_validation->run()==TRUE):
+                $session_data = $this->session->userdata('logged_in');
+                $username = $session_data['username'];
 
+                $this->usuario_model->trocar_senha($username, $nova_senha);
 
-            $dados = elements(array(
-                                    'id',
-                                    'username',
-                                    'password',
-                                    'dsc_name',
-                                    'dsc_matricula', 
-                                    'id_user_roles',
-                                    'ativo',
-                                    'dt_updated'), $this->input->post());
-            $this->usuario_model->do_update($dados, array('id'=> $id));
-        endif;
+                $msg ='<div class="alert alert-success">' . ' Senha alterada com sucesso.</div>';
+                echo $msg;
+                
+                exit();
 
-    }//fim do if
-    
-    $dados = array(
-        'users_roles'=> $this->users_roles_model->get_all()->result_array(),
-        'tela'=> 'update',
-        'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
-        'query'=> $this->usuario_model->get_byid($id)->row(),
-        'flash_data'=> $flash_data,
-         );
+            }else{
+                $msg = "Senhas diferentes";
+                echo '<div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>'. $msg .'</div>';
+                exit();
+            }
+
+        }//fim do if
+        
+        $dados = array(
+            'tela'=> 'trocar_senha',
+            'pasta'=> 'usuario',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+             );
         
         $this->load->view('conteudo', $dados );
     }
+
 
     public function  reset_senha(){   
 
