@@ -1,30 +1,20 @@
 <?php
 
-if($this->session->flashdata('excluirok')):
-    echo '<p>'.$this->session->flashdata('excluirok').'</p>';
-endif;
-
-$this->table->set_heading('ID', 'User id', 'Nome','Matrícula','Role','Status', 'Ação');
+$this->table->set_heading('Linha','Média Produção','Editar');
 
 
-foreach ($status as $linha):
-$id = array('data'=> $linha->id, 'class'=>'id-usuario');
-
+foreach ($linhas as $linha):
     $this->table->add_row(
-    $id, 
-    $linha->username, 
-    $linha->nome, 
-    $linha->dsc_matricula, 
-    $linha->role, 
-    $linha->status,
+    $linha->dsc_name, 
+    $linha->qt_media_producao,
 	'<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>');
 endforeach;
 
 
 
 
-echo '<div class="retrieve-usuarios">';
-echo '<h2>Administrar usuários</h2>';	
+echo '<div class="retrieve-linha-producao">';
+echo '<h2>Média de produção (Hr)</h2>';	
 
 echo $this->table->generate();
 
@@ -32,32 +22,4 @@ echo '</div>';
 
 ?>
 
-
-<!-- o script jquery abaixo é carregado no formulário no momento que o formulário é criado -->
-<script>
-$('.retrieve-usuarios tr td span').click(function(){
-
-	//encontra o id do usuário que será atualizado
-	var id_usuario = $(this).closest('tr').find('td[class="id-usuario"]').text();
-	var desc = 'Atualizar usuário';
-	var controller = 'usuario/update/'+id_usuario;
-	var numTran = numTab();
-
-	criarNovaAbaSemConteudo(controller, desc, numTran);
-
-	 $.ajax({
-            type      : 'post',
-            url       : controller, //é o controller que receberá
-            data      : 'id='+ id_usuario,
-            
-            success: function( response ){
- 					$('div[numtab="'+ numTran +'"]').append(response);
-			}
-        });
-
-});
-
-
-
-</script>
 

@@ -18,13 +18,33 @@ class Linha_producao extends CI_Controller {
        date_default_timezone_set('America/Sao_Paulo');//define o timezone
     }
 
-   
+    public function create(){
 
-    function logout()
-    {
-        $this->session->unset_userdata('logged_in');
-        session_destroy();
-        redirect('home', 'refresh');
+        $this->output->enable_profiler(FALSE);//MODO NATIVO DE DEBUG CODEIGNITER. MUDE PARA "TRUE" PARA HABILITAR
+
+        $dados = array(
+            'tela'=> 'create',
+            'pasta'=> 'linha_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+             );
+
+        $this->load->view('conteudo', $dados);
     }
 
-}
+    public function retrieve(){
+
+        $this->output->enable_profiler(FALSE);//MODO NATIVO DE DEBUG CODEIGNITER. MUDE PARA "TRUE" PARA HABILITAR
+
+        $dados = array(
+            'linhas'=> $this->linha_producao_model->get_all()->result(),
+            'tela'=> 'retrieve',
+            'pasta'=> 'linha_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+             );
+
+        $this->load->view('conteudo', $dados);
+        
+    }
+
+
+
+
+}//fim da classe

@@ -139,6 +139,7 @@
 .retrieve-usuarios, 
 .retrieve-ordem-producao, 
 .retrieve-componentes-produto, 
+.retrieve-linha-producao,
 .dados_componente{
 	width: 600px;
 	padding: 20px;
@@ -148,12 +149,13 @@
     display: table;
 }
 
-.retrieve-usuarios h2, .retrieve-ordem-producao h2, .retrieve-componentes-produto h2{
+.retrieve-usuarios h2, .retrieve-ordem-producao h2, .retrieve-componentes-produto h2, .retrieve-linha-producao h2{
 	margin-top: 0;
 	-moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
+    border-color: #e5e5e5
     border-color: -moz-use-text-color -moz-use-text-color #e5e5e5;
     border-image: none;
     border-style: none none solid;
