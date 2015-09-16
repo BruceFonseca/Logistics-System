@@ -9,6 +9,15 @@ class Linha_producao_model extends CI_Model{
         return $this->db->query($query);
 
     }
+
+     public function do_update($dados=NULL, $condicao=NULL){
+        if ($dados != NULL && $condicao != NULL){
+            $this->db->update('linha_producao',$dados, $condicao);
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
     
 }
 

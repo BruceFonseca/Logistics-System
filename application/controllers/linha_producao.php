@@ -44,6 +44,46 @@ class Linha_producao extends CI_Controller {
         
     }
 
+    public function update(){
+
+      // recebe o id do usuário através da URL
+
+        if($this->uri->segment(3)){
+          $linha = $this->uri->segment(3);
+
+          $dados = array(
+                'qt_media_producao'=> trim($this->input->post('qt_media_producao')),
+                'cd_status'=> trim($this->input->post('ativo')),
+          );
+
+          ;
+
+          if($this->linha_producao_model->do_update($dados, array('dsc_name'=>$linha))==TRUE){
+            echo '<div class="alert alert-success">' . ' Linha atualizada com sucesso.</div>';
+            exit();
+          }else{
+            echo '<div class="alert alert-danger" role="alert">
+                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                     <span class="sr-only">Error:</span>Favor verificar dados inseridos</div>';
+            exit();
+          }
+
+        }
+
+        $this->output->enable_profiler(FALSE);//MODO NATIVO DE DEBUG CODEIGNITER. MUDE PARA "TRUE" PARA HABILITAR
+
+        $dados = array(
+            'linha'=> trim($this->input->post('linha')),
+            'qt_media_producao'=> trim($this->input->post('qt_media_producao')),
+            'cd_status'=> trim($this->input->post('cd_status')),
+            'tela'=> 'update',
+            'pasta'=> 'linha_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+        );
+
+        $this->load->view('conteudo', $dados);
+        
+    }
+
 
 
 
