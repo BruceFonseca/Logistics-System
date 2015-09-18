@@ -12,7 +12,8 @@ class Ordem_producao extends CI_Controller{
 	   $this->load->library('session');
        $this->load->library('table');//carrega tabela ;
 	   $this->load->database();//carrega o banco de dados para fazer operações no banco
-	   $this->load->model('ordem_producao_model');//carrega o model
+       $this->load->model('ordem_producao_model');//carrega o model
+	   $this->load->model('linha_producao_model');//carrega o model
 	   $this->load->library('excel_reader');//carrega library para ler o excel
        date_default_timezone_set('America/Sao_Paulo');//define o timezone
 	}
@@ -29,6 +30,24 @@ class Ordem_producao extends CI_Controller{
             'tela'=> 'retrieve_of',
             'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
             'status'=> $this->ordem_producao_model->get_produto_of($of, $produto)->result(),
+             );
+
+        $this->load->view('conteudo', $dados);
+    }
+
+    public function admin_OF() {
+
+        $this->output->enable_profiler(false);//MODO NATIVO DE DEBUG CODEIGNITER. MUDE PARA "TRUE" PARA HABILITAR
+        
+        // $linha =  $this->linha_producao_model->get_linhas()->result_array();
+
+        // pd($linha);
+
+        $dados = array(
+            'linha'=> $this->linha_producao_model->get_linhas()->result_array(),
+            'tela'=> 'admin_of',
+            'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'status'=>'',
              );
 
         $this->load->view('conteudo', $dados);
