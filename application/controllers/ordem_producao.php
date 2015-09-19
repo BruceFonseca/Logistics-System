@@ -35,6 +35,31 @@ class Ordem_producao extends CI_Controller{
         $this->load->view('conteudo', $dados);
     }
 
+     public function retrieve_OF_admin() {
+        //retorna as of's de acordo com a solicitações vindas da view admin_of.php
+        
+        $status= $this->input->post('status');
+        $linha= $this->input->post('linha');
+        $data= $this->input->post('data');
+
+        $where = Array();
+
+        //seta as condições para query de acordo com o recebido de POST
+        if($status != " "){$where[]   = " `cd_status` LIKE '%".trim($status)."%'";}
+        if($linha != " "){$where[]      = " cd_linha LIKE '%".trim($linha)."%'";}
+        if($data != " "){$where[] = " dt_inicio_plan LIKE '"."%".trim($data)."%'";}
+
+        $condicao = " WHERE " . implode( ' AND ',$where );
+
+        $dados = array(
+            'tela'=> 'tabela_admin_of',
+            'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            'status'=> $this->ordem_producao_model->get_with_condition($condicao)->result(),
+             );
+
+        $this->load->view('conteudo', $dados);
+    }
+
     public function admin_OF() {
 
         $this->output->enable_profiler(false);//MODO NATIVO DE DEBUG CODEIGNITER. MUDE PARA "TRUE" PARA HABILITAR
