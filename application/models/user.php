@@ -10,6 +10,7 @@ Class User extends CI_Model
 {
     function login($username, $password)
     {
+
         $this -> db -> select('id, username, password, users.dsc_name, user_roles.dsc_name as role');
         $this -> db -> from('users');
         $this->db->join('user_roles', 'user_roles.id_user_roles = users.id_user_roles');

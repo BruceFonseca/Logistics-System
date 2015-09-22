@@ -10,6 +10,8 @@ class Verifylogin extends CI_Controller {
 
     function index()
     {
+
+
         //This method will have the credentials validation
         $this->load->library('form_validation');
 
@@ -23,20 +25,22 @@ class Verifylogin extends CI_Controller {
         }
         else
         {
-            //Go to private area
-            redirect('home', 'refresh');
+            // if( $this->check_database($username, $password) != FALSE){
+                //Go to private area
+                redirect('home', 'refresh');
+            // }
         }
 
     }
 
-    function check_database($password)
+    function check_database()
     {
-        //Field validation succeeded.  Validate against database
-        $username = $this->input->post('usuario');
-
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        
         //query the database
         $result = $this->user->login($username, $password);
-
+        
         if($result)
         {
             $sess_array = array();
@@ -55,7 +59,7 @@ class Verifylogin extends CI_Controller {
         else
         {
             $this->form_validation->set_message('check_database', 'Usuário ou senha incorretos');
-            return false;
+            return FALSE;
         }
     }
 }

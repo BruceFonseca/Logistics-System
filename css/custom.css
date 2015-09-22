@@ -43,7 +43,9 @@
 .form form input[type="submit"]{
     width: 100px;
 }
-.form form button, .form form input[type="submit"] {
+.form form button, 
+.retrieve-componentes-produto button,
+.form form input[type="submit"] {
     background-image: linear-gradient(to bottom, #337ab7 0%, #265a88 100%);
     background-repeat: repeat-x;
     border-color: #245580;
@@ -322,4 +324,8 @@ tbody:hover tr:hover td {
 .alert.alert-success{
     display: table;
     z-index: 320;
+}
+
+input.seq_prod{
+    width: 60px;
 }
