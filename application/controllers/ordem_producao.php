@@ -103,11 +103,12 @@ class Ordem_producao extends CI_Controller{
             $this->load->view('conteudo', $dados);
 
         }else{
-
+            $condicao = " WHERE cd_linha LIKE '%zzz%'";
             $dados = array(
                 'tela'=> 'retrieve',
                 'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
-                'status'=> $this->ordem_producao_model->get_all()->result(),
+                // 'status'=> $this->ordem_producao_model->get_all()->result(),
+                'status'=> $this->ordem_producao_model->get_with_condition($condicao)->result(),
                  );
             $this->load->view('conteudo', $dados);
         }
