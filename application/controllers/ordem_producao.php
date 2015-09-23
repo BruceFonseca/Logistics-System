@@ -29,6 +29,20 @@ class Ordem_producao extends CI_Controller{
             // 'dados_of'=> $this->ordem_producao_model->get_dados_of($of, $produto)->result_array(),
             'tela'=> 'retrieve_of',
             'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
+            // 'status'=> $this->ordem_producao_model->get_produto_of($of, $produto)->result(),
+             );
+
+        $this->load->view('conteudo', $dados);
+    }
+
+    public function retrieve_tabela_of(){
+
+        $of= trim($this->input->post('of'));
+        $produto= trim($this->input->post('produto'));
+
+        $dados = array(
+            'tela'=> 'retrieve_tabela_of',
+            'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
             'status'=> $this->ordem_producao_model->get_produto_of($of, $produto)->result(),
              );
 

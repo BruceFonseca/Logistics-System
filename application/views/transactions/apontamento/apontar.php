@@ -75,6 +75,7 @@ echo form_close();
 		$('.dados_componente .form').remove();
 		$('.dados_componente .body-table-abastecimento').remove();
 		$('.dados_componente script').remove();
+		atualiza_tabela_OF();
 	});
 
 	$(".submit-apontamento").click(function(){

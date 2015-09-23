@@ -63,7 +63,8 @@ class Ordem_producao_model extends CI_Model{
       				   qt_planejada, 
       				   qt_produzida,
       				   dt_inicio_plan,
-      				   dt_termino_plan
+      				   dt_termino_plan,
+      				   seq_prod 
       			FROM ordem_producao '; 
 
       	$order = ' ORDER BY dt_inicio_plan ';

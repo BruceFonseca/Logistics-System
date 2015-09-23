@@ -2,22 +2,24 @@
 
 
 
-$this->table->set_heading('Abrir', 'Componente', 'Descrição' , 'qt_componente', 'qt_necessaria', 'qt_abastecido' );
+// $this->table->set_heading('Abrir', 'Componente', 'Descrição' , 'qt_componente', 'qt_necessaria', 'qt_abastecido', 'qt_faltante' );
 
-foreach ($status as $linha):
+// foreach ($status as $linha):
     
-    $cd_componente = array('data'=> $linha->componente, 'class'=>'cd-componente');
-    $qt_necessaria = (int)$linha->qt_componente * (int)  $linha->qt_planejada;
+//     $cd_componente = array('data'=> $linha->componente, 'class'=>'cd-componente');
+//     $qt_necessaria = (int)$linha->qt_componente * (int)  $linha->qt_planejada;
+//     $qt_faltante = $qt_necessaria - (int)  $linha->qt_abastecido;
 
-    $this->table->add_row(
-    '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>',
-    $cd_componente,
-    $linha->dsc_componente,
-    $linha->qt_componente,
-    $qt_necessaria,
-    $linha->qt_abastecido
-    );
-endforeach;
+//     $this->table->add_row(
+//     '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>',
+//     $cd_componente,
+//     $linha->dsc_componente,
+//     $linha->qt_componente,
+//     $qt_necessaria,
+//     $linha->qt_abastecido,
+//     $qt_faltante
+//     );
+// endforeach;
 
 
 echo '<div class="retrieve-componentes-produto">';
@@ -46,7 +48,7 @@ echo form_input(array('name'=>'dt_termino_plan', 'class'=>'dt_termino_plan', 'di
 echo '</form>';
 
 echo '<div class="body-table">';
-    echo $this->table->generate();
+    // echo $this->table->generate();
 echo '</div>';
 
 echo '</div>';
@@ -54,31 +56,39 @@ echo '</div>';
 ?>
 
 <script>
-$('.retrieve-componentes-produto .body-table tr td span').on('click', function(){
-    
+
+
+$(document).ready(function(){
+        atualiza_tabela_OF();
+ });
+
+function atualiza_tabela_OF(){
+
+    var cd_of = $('.retrieve-componentes-produto form input[class="of"]').val();
+    var cd_produto = $('.retrieve-componentes-produto form input[class="produto"]').val();
+
     //encontra o id do usuário que será atualizado
-    var cd_of = $(this).closest('.retrieve-componentes-produto').find('input[class="of"]').val();
-    var cd_produto = $(this).closest('.retrieve-componentes-produto').find('input[class="produto"]').val();
-    var cd_componente = $(this).closest('tr').find('td[class="cd-componente"]').text();
+    var dados = 'of= '         + cd_of +
+                ' & produto= '    + cd_produto;
 
-    // var height = $('.retrieve-componentes-produto').height());
+        // alert(dados);
+        // var numtab = $(this).closest("div").attr("numtab");
+        
 
-    var controller = 'apontamento/apontar';
+            $.ajax({
+                type: "POST",
+                url: "ordem_producao/retrieve_tabela_of",
+                data: dados,
+                success: function( response )
+                {
+                    // alert('deu certo   ' + response);
+                    $('.retrieve-componentes-produto .body-table table').remove();
+                    $('.retrieve-componentes-produto .body-table').append(response);
+                }
+            });
 
-     $.ajax({
-            type      : 'post',
-            url       : controller, //é o controller que receberá
-            data      : 'of='+ cd_of + ' & produto= ' + cd_produto  + ' & componente= ' + cd_componente,
-            
-            success: function( response ){
-                $('.apontamento').show();
+}
 
-                $('.dados_componente').css( "display", "table" );
-                $('.dados_componente').css( "position", "absolute" );
-                $('.dados_componente').append(response);
-            }
-        });
 
-});
 </script>
 
