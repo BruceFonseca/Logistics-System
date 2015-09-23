@@ -48,7 +48,13 @@ echo '</div>';
     $(".filtros input").keyup(function(){
         atualiza_tabela();
     });
-
+    $(".filtros button").click(function(){
+        $('.filtros .filtro-linha').val('');
+        $('.filtros .filtro-OF').val('');
+        $('.filtros .filtro-produto').val('');
+        $('.body-table table').remove();
+    });
+    
     $(document).ready(function(){
         atualiza_tabela();
     });
@@ -58,10 +64,6 @@ echo '</div>';
         var dados = 'linha= '        + $('.filtros .filtro-linha').val() +
                     '& OF= '         + $('.filtros .filtro-OF').val() +
                     '& produto= '    + $('.filtros .filtro-produto').val() ;
-
-        // alert(dados);
-        // var numtab = $(this).closest("div").attr("numtab");
-        
 
             $.ajax({
                 type: "POST",

@@ -44,6 +44,7 @@
     width: 100px;
 }
 .form form button, 
+.filtros button,
 .retrieve-componentes-produto button,
 .form form input[type="submit"] {
     background-image: linear-gradient(to bottom, #337ab7 0%, #265a88 100%);
@@ -104,7 +105,8 @@
 .form form input, .form form select, 
 .retrieve-ordem-producao form input, 
 .retrieve-componentes-produto form select, 
-.retrieve-componentes-produto form input{
+.retrieve-componentes-produto form input,
+.filtros input{
 	text-align: left;
 	padding-left: 10px;
 	margin-left: 20px;
