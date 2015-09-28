@@ -50,9 +50,11 @@ $autoload['packages'] = array();
 | Prototype:
 |
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
+	// Load the csv_import library when loading the spark
+	$autoload['libraries'] = array('csvimport');
 */
 
-$autoload['libraries'] = array('database','session');
+$autoload['libraries'] = array('database','session', 'csvimport');
 
 
 /*
