@@ -13,6 +13,7 @@ class Estrutura_produto extends CI_Controller{
 	   $this->load->database();//carrega o banco de dados para fazer operações no banco
 	   $this->load->model('estrutura_produto_model');//carrega o model
 	   $this->load->library('excel_reader');//carrega library para ler o excel
+       $this->load->library('csvimport');// carrega library para ler o csv
 	}
 
 	function importar() {
@@ -26,18 +27,18 @@ class Estrutura_produto extends CI_Controller{
             // Define file rules
             $this->upload->initialize(array(
                 "upload_path"       =>  $path,
-                "allowed_types"     =>  "xls",
+                "allowed_types"     =>  'text/plain|text|csv|csv',
                 // "max_size"          =>  '1000',
                 // "max_width"         =>  '1024',
                 // "max_height"        =>  '768'
             ));
             
             if($this->upload->do_multi_upload("uploadfile")){
+               
                 $data['upload_data'] = $this->upload->get_multi_upload_data();
-
                 $arquivo = $data['upload_data'][0]["file_name"];
 
-                $this->estrutura_produto_model->verificar($arquivo) == TRUE;
+                $this->estrutura_produto_model->verificar_csv($arquivo) == TRUE;
                 //se importado, então .... importado com sucesso
 
                 echo '<div class="alert alert-success">' . ' Arquivo carregado com sucesso.</div>';
@@ -47,7 +48,7 @@ class Estrutura_produto extends CI_Controller{
                 // Output the errors
                 $errors = $this->upload->display_errors('<div class="alert alert-danger" role="alert">
                                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                                        <span class="sr-only">Error:</span>', '<br>Favor inserir um arquivo com extensão <strong>.xls</strong></div>');               
+                                                        <span class="sr-only">Error:</span>', '<br>Favor inserir um arquivo com extensão <strong>.csv</strong></div>');              
                 echo $errors;
             }
             exit();

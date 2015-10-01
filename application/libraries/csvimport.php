@@ -23,7 +23,8 @@ class Csvimport {
     private $filepath = FALSE;
     private $column_headers = FALSE;
     private $initial_line = 0;
-    private $delimiter = ",";
+    // private $delimiter = ","; // VALOR ORIGINAL BAIXADO NO GITHUB
+    private $delimiter = ";";
     private $detect_line_endings = FALSE;
 
    /**
