@@ -14,6 +14,7 @@ class Estrutura_produto extends CI_Controller{
 	   $this->load->model('estrutura_produto_model');//carrega o model
 	   $this->load->library('excel_reader');//carrega library para ler o excel
        $this->load->library('csvimport');// carrega library para ler o csv
+       date_default_timezone_set('America/Sao_Paulo');//define o timezone
 	}
 
 	function importar() {
