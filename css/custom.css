@@ -104,6 +104,7 @@
 }
 .form form input, .form form select, 
 .retrieve-ordem-producao form input, 
+.retrieve-ordem-producao .filtros select,
 .retrieve-componentes-produto form select, 
 .retrieve-componentes-produto form input,
 .filtros input{

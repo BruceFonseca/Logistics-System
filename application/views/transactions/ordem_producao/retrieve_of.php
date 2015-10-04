@@ -1,27 +1,5 @@
 <?php
 
-
-
-// $this->table->set_heading('Abrir', 'Componente', 'Descrição' , 'qt_componente', 'qt_necessaria', 'qt_abastecido', 'qt_faltante' );
-
-// foreach ($status as $linha):
-    
-//     $cd_componente = array('data'=> $linha->componente, 'class'=>'cd-componente');
-//     $qt_necessaria = (int)$linha->qt_componente * (int)  $linha->qt_planejada;
-//     $qt_faltante = $qt_necessaria - (int)  $linha->qt_abastecido;
-
-//     $this->table->add_row(
-//     '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>',
-//     $cd_componente,
-//     $linha->dsc_componente,
-//     $linha->qt_componente,
-//     $qt_necessaria,
-//     $linha->qt_abastecido,
-//     $qt_faltante
-//     );
-// endforeach;
-
-
 echo '<div class="retrieve-componentes-produto">';
 echo '<h2>Administrar OF <strong>'.  $dados_of->cd_of .'</strong></h2>';
 
@@ -44,6 +22,9 @@ echo form_input(array('name'=>'dt_inicio_plan', 'class'=>'dt_inicio_plan', 'disa
 
 echo form_label('Término');
 echo form_input(array('name'=>'dt_termino_plan', 'class'=>'dt_termino_plan', 'disabled'=>'TRUE'),  set_value('dt_termino_plan', date('d/m/Y H:i:s', strtotime($dados_of->dt_termino_plan))),'bloqued')."<br>";
+
+echo form_label('Status');
+echo form_dropdown('status',  array("LIB"=>"LIBERADO", "PRO"=>"PROGRAMADO", "FIN"=>"FINALIZADO"), set_value('status', $dados_of->cd_status), 1)."<br>";
 
 echo '</form>';
 
@@ -87,6 +68,29 @@ function atualiza_tabela_OF(){
                 }
             });
 
+}
+
+$('select[name="status"]').on('change', function(){
+    atualiza_OF();
+});
+
+function atualiza_OF(){
+
+    status = $('select[name="status"]').val();
+    of = $('input[name="of"]').val();
+    produto = $('input[name="produto"]').val();
+    
+    var controller = 'ordem_producao/update_status';
+
+     $.ajax({
+            type      : 'post',
+            url       : controller, //é o controller que receberá
+            data      : 'status='+ status + ' & of= ' + of  + ' & produto= ' + produto,
+            
+            success: function( response ){
+                alert('OF Atualizada com sucesso!!!');
+            }
+        });
 }
 
 

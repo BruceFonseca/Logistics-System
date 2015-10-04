@@ -102,6 +102,16 @@ class Ordem_producao extends CI_Controller{
         // pd($seq_prod . '......'. $of_prod . '........' . $prod_prod);
     }
 
+    public function update_status(){
+        
+        $of_prod   = trim($this->input->post('of'));
+        $prod_prod = trim($this->input->post('produto'));
+        $status = trim($this->input->post('status'));
+
+        $this->ordem_producao_model->do_update_status($of_prod, $prod_prod, $status );
+
+    }
+
     public function retrieve() {
         
         if($this->input->post()){
@@ -129,6 +139,7 @@ class Ordem_producao extends CI_Controller{
         }else{
             $condicao = " WHERE cd_linha LIKE '%zzz%'";
             $dados = array(
+                'linha'=> $this->linha_producao_model->get_linhas()->result_array(),
                 'tela'=> 'retrieve',
                 'pasta'=> 'ordem_producao',// é a pasta que está dentro de "telas". existe uma pasta para cada tabela a ser cadastrada
                 // 'status'=> $this->ordem_producao_model->get_all()->result(),

@@ -1,7 +1,6 @@
 <?php
 
-
-$this->table->set_heading('Abrir','Linha', 'OF', 'Produto','Status','Qtd. plan.',' Qtd. prod', 'Dt_Inic.', 'Dt_Term.');
+$this->table->set_heading('Abrir','Linha', 'OF', 'Produto','Status','Qtd. plan.',' Qtd. prod', 'Dt_Inic.', 'Dt_Term.', 'Sequência');
 
 foreach ($status as $linha):
     $of= array('data'=> $linha->cd_of, 'class'=>'cd-of');
@@ -16,7 +15,8 @@ foreach ($status as $linha):
     $linha->qt_planejada,
     $linha->qt_produzida,
     date('d/m/Y H:i:s', strtotime($linha->dt_inicio_plan)),
-    date('d/m/Y H:i:s', strtotime($linha->dt_termino_plan))
+    date('d/m/Y H:i:s', strtotime($linha->dt_termino_plan)),
+    $linha->seq_prod
     );
 endforeach;
 
