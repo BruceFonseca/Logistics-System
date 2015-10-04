@@ -78,6 +78,15 @@ class Ordem_producao_model extends CI_Model{
       	return $this->db->query($query);
     }
 
+    public function do_update_OF($of_prod=NULL, $prod_prod=NULL, $seq_prod=NULL){
+    	$query =   ' UPDATE ordem_producao
+					 SET seq_prod = ' . (int) $seq_prod . ' , 
+					     cd_status = ' . "'".'PRO' . "' " .
+				   ' WHERE cd_of = '. $of_prod .' AND cd_produto = ' . $prod_prod;
+				   pd($query);
+		return $this->db->query($query);
+    }		
+
 
 	public function verificar($arquivo){
 

@@ -21,7 +21,7 @@ echo form_label('Início');
 echo form_input(array('name'=>'dt_inicio', 'class'=>'dt_inicio_plan', 'placeholder'=>"dd/mm/aaaa"));
 
 echo form_label('');
-echo form_button(array('name'=>'cadastrar', 'class'=>'submit-admin-of', 'id'=>'submit','content'=>'Atualizar', 'type'=>'submit'))."<br>";
+echo form_button(array('name'=>'cadastrar', 'class'=>'submit-admin-of','content'=>'Atualizar', 'type'=>'submit'))."<br>";
 
 // set_value('dt_termino_plan', date('d/m/Y', time())
 echo '</form>';
@@ -70,57 +70,52 @@ function atualiza_OF(){
         });
 }
 
-$(".submit-admin-of").click(function(){
 
-    // insere_sequencia();
-     if(valida_sequencias() == true){
-        insere_sequencia();
-     }else{
-        alert('Verifique os valores inseridos. Pois devem ser numéricos');
-     }
+    $(".submit-admin-of").click(function(){
 
 
-        // //encontra o id do usuário que será atualizado
-        // var motivo = $(this).closest('.apontamento-componente').find('select[class="motivo"]').val()
+        var controller = 'ordem_producao/update_OF';
 
-        // var controller = 'apontamento/apontar_componente';
+        $('.admin_of').submit(function(){
 
-        // $('.admin_of').submit(function(){
-
-
-
-        //     return false;
-        // });
+            if(valida_sequencias() == true){
+               insere_sequencia();
+             }
+            alert('Sequências atualizadas com sucesso');
+            return false;
+        });
     });
 
+    function insere_sequencia(){
 
-function insere_sequencia(){
+        $('input.seq_prod').each( function(){
 
-    $('input.seq_prod').each( function() {
-        
-        var seq_prod = $('input.seq_prod').val();
-        var linha_prod = $('input.seq_prod').closest('tr').find('td[class="linha-prod"]').text();
-        var of_prod = $('input.seq_prod').closest('tr').find('td[class="of-prod"]').text();
-        var prod_prod = $('input.seq_prod').closest('tr').find('td[class="prod-prod"]').text();
-
-        $.ajax({
-            type: "POST",
-            url: controller,
-            data:   'seq_prod='               +seq_prod + 
-                    ' & linha_prod= '         +linha_prod  + 
-                    ' & of_prod= '            + of_prod +
-                    ' & prod_prod= '          + prod_prod,
+            var seq_prod = $(this).val();
+            // var linha_prod = $('input.seq_prod').closest('tr').find('td[class="linha-prod"]').text();
+            var of_prod = $(this).closest('tr').find('td[class="of-prod"]').text();
+            var prod_prod = $(this).closest('tr').find('td[class="prod-prod"]').text();
             
-            success: function( response )
-            {
-                alert(response);
-            }
+            var controller = 'ordem_producao/update_OF';
+
+            $.ajax({
+                type: "POST",
+                url: controller,
+                data:   'seq_prod='               +seq_prod + 
+                        // ' & linha_prod= '         +linha_prod  + 
+                        ' & of_prod= '            + of_prod +
+                        ' & prod_prod= '          + prod_prod,
+                
+                success: function( response )
+                {
+                    alert(response);
+                }
+            });
         });
 
 
+
+        // }
     }
-    
-}
 
 function valida_sequencias(){
     //verifica se os inputs com valor, são númericos
@@ -129,26 +124,27 @@ function valida_sequencias(){
 
     var resposta = true;
 
-    $('input.seq_prod').each( function() {
+    // $('input.seq_prod').each( function() {
 
-        var seq_prod = $(this).val();
+    //     var seq_prod = $(this).val();
 
-        if ($.isNumeric(seq_prod)) {//SE É NUMERO
+    //     if ($.isNumeric(seq_prod)) {//SE É NUMERO
             
-            if(resposta == false){
-                resposta = false;
-            }else{
-                resposta = true;
-            }
-        }
-        else if(!$.isNumeric(seq_prod) && (seq_prod != "")){//SE NÃO É UM NUMERO E NÃO ESTÁ EM GRANCO
-            resposta = false;
-        }
+    //         if(resposta == false){
+    //             resposta = false;
+    //         }else{
+    //             resposta = true;
+    //         }
+    //     }
+    //     else if(!$.isNumeric(seq_prod) && (seq_prod != "")){//SE NÃO É UM NUMERO E NÃO ESTÁ EM GRANCO
+    //         resposta = false;
+    //     }
 
-    });
+    // });
 
     return resposta;
 
 }
+
 </script>
 

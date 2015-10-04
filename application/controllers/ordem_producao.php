@@ -92,6 +92,16 @@ class Ordem_producao extends CI_Controller{
         $this->load->view('conteudo', $dados);
     }
 
+    public function update_OF(){
+        $seq_prod  = trim($this->input->post('seq_prod'));
+        $of_prod   = trim($this->input->post('of_prod'));
+        $prod_prod = trim($this->input->post('prod_prod'));
+
+        $this->ordem_producao_model->do_update_OF($of_prod, $prod_prod, $seq_prod );
+
+        // pd($seq_prod . '......'. $of_prod . '........' . $prod_prod);
+    }
+
     public function retrieve() {
         
         if($this->input->post()){
